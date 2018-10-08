@@ -1,4 +1,7 @@
 package controllers
 
-// TODO
-interface LoginController
+interface LoginController {
+    fun start()
+    fun setApplication(app: Application): LoginController
+    //fun authenticate(username: String, password: String) TODO
+}

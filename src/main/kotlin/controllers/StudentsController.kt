@@ -1,4 +1,8 @@
 package controllers
 
-// TODO
-interface StudentsController
+interface StudentsController {
+    fun start()
+    fun setApplication(app: Application): StudentsController
+    //fun addStudent(name: String, id: Int) TODO
+    //fun addGroup(groupName: String, vararg ids: Int) TODO
+}
