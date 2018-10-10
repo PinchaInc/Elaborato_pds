@@ -1,4 +1,4 @@
-## 	Use Cases
+## Use Cases
 
 ### UC.1 - Inserimento di un nuovo studente
 
@@ -60,8 +60,8 @@
 
 #### Scenario alternativo A1 - Uno o più studenti selezionati fa già parte di un gruppo
 
-| Docente o tutor | Sistema                                                      |
-| --------------- | ------------------------------------------------------------ |
+| Docente o tutor | Sistema                                                                                                                                                    |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |                 | A1.10.1 Il sistema comunica che uno o più studenti selezionati fanno già parte di un gruppo e li mostra<br />Ritorno allo scenario principale al punto 8.1 |
 
 #### Scenario alternativo A2 - Il nome del gruppo non è univoco
@@ -80,20 +80,20 @@
 
 #### Scenario principale
 
-| Docente o tutor                                                         | Sistema                                                                                                                                                                                      |
-| ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1.1 Il docente o il tutor chiede di accedere al sistema                 |                                                                                                                                                                                              |
-|                                                                         | 2.1 Il sistema chiede le credenziali di accesso                                                                                                                                              |
-| 3.1 Il docente o il tutor comunica il suo username e la password        |                                                                                                                                                                                              |
-|                                                                         | 4.1 Il sistema autentica il docente o il tutor                                                                                                                                               |
-| 5.1 Il docente o il tutor chiede la lista dei gruppi                    |                                                                                                                                                                                              |
-|                                                                         | 6.1 Il sistema mostra la  lista dei gruppi precedentemente creati                                                                                                                            |
-| 7.1 Il docente o il tutor chiede di assegnare un elaborato ad un gruppo |                                                                                                                                                                                              |
-|                                                                         | 8.1 Il sistema chiede di selezionare il gruppo a cui assegnare l'elaborato                                                                                                                   |
-| 9.1 Il docente o il tutor seleziona il gruppo dalla lista               |                                                                                                                                                                                              |
-|                                                                         | 10.1 Il sistema verifica che al gruppo selezionato non sia già stato assegnato un elaborato<br />10.2 Il sistema chiede di caricare il documento (.pdf) contenente la traccia dell'elaborato |
-| 11.1 Il docente o il tutor sceglie il file da caricare                  |                                                                                                                                                                                              |
-|                                                                         | 12.1 Il sistema comunica il buon esito dell'operazione                                                                                                                                       |
+| Docente o tutor                                                         | Sistema                                                                                                                                                                                                                                 |
+| ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1.1 Il docente o il tutor chiede di accedere al sistema                 |                                                                                                                                                                                                                                         |
+|                                                                         | 2.1 Il sistema chiede le credenziali di accesso                                                                                                                                                                                         |
+| 3.1 Il docente o il tutor comunica il suo username e la password        |                                                                                                                                                                                                                                         |
+|                                                                         | 4.1 Il sistema autentica il docente o il tutor                                                                                                                                                                                          |
+| 5.1 Il docente o il tutor chiede la lista dei gruppi                    |                                                                                                                                                                                                                                         |
+|                                                                         | 6.1 Il sistema mostra la  lista dei gruppi precedentemente creati                                                                                                                                                                       |
+| 7.1 Il docente o il tutor chiede di assegnare un elaborato ad un gruppo |                                                                                                                                                                                                                                         |
+|                                                                         | 8.1 Il sistema chiede di selezionare il gruppo a cui assegnare l'elaborato                                                                                                                                                              |
+| 9.1 Il docente o il tutor seleziona il gruppo dalla lista               |                                                                                                                                                                                                                                         |
+|                                                                         | 10.1 Il sistema verifica che al gruppo selezionato non sia già stato assegnato un elaborato<br />10.2 Il sistema verifica che la lista delle tracce non sia vuota<br/>10.3 Il sistema chiede di scegliere una tra le tracce disponibili |
+| 11.1 Il docente o il tutor sceglie la traccia                           |                                                                                                                                                                                                                                         |
+|                                                                         | 12.1 Il sistema comunica il buon esito dell'operazione                                                                                                                                                                                  |
 
 #### Scenario alternativo A1 - La lista dei gruppi è vuota
 
@@ -107,6 +107,12 @@
 | --------------- | ---------------------------------------------------------------------------------------- |
 |                 | A1.10.2 Il sistema comunica che al gruppo selezionato è già stato assegnato un elaborato |
 
+#### Scenario alternativo A3 - Al gruppo è già stato assegnato un elaborato
+
+| Docente o tutor | Sistema                                                       |
+| --------------- | ------------------------------------------------------------- |
+|                 | A1.10.3 Il sistema comunica che la lista delle tracce è vuota |
+
 ### UC.4 - Aggiunta di un nuovo incontro con un gruppo
 
 | Nome del caso d'uso | Aggiunta di un nuovo incontro con un gruppo                                                          |
@@ -117,25 +123,25 @@
 
 #### Scenario principale
 
-| Docente o tutor                                              | Sistema                                                      |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 1.1 Il docente o il tutor chiede di accedere al sistema      |                                                              |
-|                                                              | 2.1 Il sistema chiede le credenziali di accesso              |
-| 3.1 Il docente o il tutor comunica il suo username e la password |                                                              |
-|                                                              | 4.1 Il sistema autentica il docente o il tutor               |
-| 5.1 Il docente o il tutor chiede di visualizzare l'agenda degli incontri con i gruppi |                                                              |
-|                                                              | 6.1 Il sistema mostra l'agenda                               |
-| 7.1 Il docente o il tutor chiede di inserire un nuovo incontro |                                                              |
-|                                                              | 8.1 Il sistema chiede di selezionare la data e l'ora dell'incontro |
-| 9.1 Il docente o il tutor inserisce la data e l'ora dell'incontro |                                                              |
-|                                                              | 10.1 Il sistema chiede di selezionare il gruppo interessato all'incontro |
-| 11.1 Il docente o il tutor seleziona il gruppo               |                                                              |
-|                                                              | 12.1 Il sistema controlla che il gruppo inserito non abbia superato il limite massimo di incontri<br />12.2 Il sistema comunica il buon esito dell'operazione |
+| Docente o tutor                                                                       | Sistema                                                                                                                                                       |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1.1 Il docente o il tutor chiede di accedere al sistema                               |                                                                                                                                                               |
+|                                                                                       | 2.1 Il sistema chiede le credenziali di accesso                                                                                                               |
+| 3.1 Il docente o il tutor comunica il suo username e la password                      |                                                                                                                                                               |
+|                                                                                       | 4.1 Il sistema autentica il docente o il tutor                                                                                                                |
+| 5.1 Il docente o il tutor chiede di visualizzare l'agenda degli incontri con i gruppi |                                                                                                                                                               |
+|                                                                                       | 6.1 Il sistema mostra l'agenda                                                                                                                                |
+| 7.1 Il docente o il tutor chiede di inserire un nuovo incontro                        |                                                                                                                                                               |
+|                                                                                       | 8.1 Il sistema chiede di selezionare la data e l'ora dell'incontro                                                                                            |
+| 9.1 Il docente o il tutor inserisce la data e l'ora dell'incontro                     |                                                                                                                                                               |
+|                                                                                       | 10.1 Il sistema chiede di selezionare il gruppo interessato all'incontro                                                                                      |
+| 11.1 Il docente o il tutor seleziona il gruppo                                        |                                                                                                                                                               |
+|                                                                                       | 12.1 Il sistema controlla che il gruppo inserito non abbia superato il limite massimo di incontri<br />12.2 Il sistema comunica il buon esito dell'operazione |
 
 #### Scenario alternativo A1 - Il gruppo inserito ha già usufruito di tutti gli incontri disponibili
 
-| Docente o tutor | Sistema                                                      |
-| --------------- | ------------------------------------------------------------ |
+| Docente o tutor | Sistema                                                                                                                                                      |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 |                 | A1.12.3 Il sistema comunica che il gruppo selezionato ha già usufruito di tutti gli incontri disponibili<br />Ritorno allo scenario principale al punto 10.1 |
 
 ### UC5 - Registrazione dello stato di avanzamento di un gruppo
