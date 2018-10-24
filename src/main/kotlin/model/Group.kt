@@ -15,14 +15,12 @@ class Group private constructor(var name: String, val members: Array<Student>) {
     fun addMeeting(meeting: Meeting) {
         if (!meetings.contains(meeting)) {
             meetings.add(meeting)
-            meeting.group = this
         }
     }
 
     fun removeMeeting(meeting: Meeting) {
         if (meetings.contains(meeting)) {
             meetings.remove(meeting)
-            meeting.group = null
         }
     }
 
