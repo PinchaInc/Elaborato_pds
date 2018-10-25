@@ -1,6 +1,6 @@
 package model
 
-class Group private constructor(var name: String, val members: Array<Student>) {
+class Group(var name: String, val members: Array<Student>) {
     val meetings = ArrayList<Meeting>()
     var work: Work? = null
         set(work) {
@@ -26,10 +26,9 @@ class Group private constructor(var name: String, val members: Array<Student>) {
 
     companion object {
         fun createGroup(name: String, vararg students: Student): Group? {
-            return if (students.none { it.group != null })
+            return if (students.isNotEmpty() && students.none { it.group != null })
                 Group(name, students.toList().toTypedArray())
-            else
-                null
+            else null
         }
     }
 }

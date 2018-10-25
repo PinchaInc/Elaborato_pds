@@ -1,11 +1,7 @@
 package model
 
-class Work private constructor(val group: Group, val workTrack: WorkTrack) {
+class Work(val group: Group, val workTrack: WorkTrack) {
     val reviews = ArrayList<Review>()
-
-    init {
-        group.work = this
-    }
 
     fun addReview(review: Review){
         if (!reviews.contains(review)) {
@@ -23,10 +19,11 @@ class Work private constructor(val group: Group, val workTrack: WorkTrack) {
 
     companion object {
         fun createWork(group: Group, workTrack: WorkTrack): Work? {
-            return if (group.work == null)
-                Work(group, workTrack)
-            else
-                null
+            return if (group.work == null){
+                val work = Work(group, workTrack)
+                group.work = work
+                work
+            } else null
         }
     }
 }
