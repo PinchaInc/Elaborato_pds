@@ -10,7 +10,11 @@ class Course(val name: String, val year: Year) {
     val groups = ArrayList<Group>()
 
     fun addStudent(student: Student) {
-        if (student.course == null && !students.contains(student)) {
+        if (
+            student.course == null
+            && !students.contains(student)
+            && students.none { it.id == student.id }
+        ) {
             students.add(student)
             student.course = this
         }
