@@ -1,6 +1,6 @@
 package model
 
-sealed class Review(val title: String, val body: String) {
+open class Review(val title: String, val body: String) {
     var meeting: Meeting? = null
     var work: Work? = null
 }
