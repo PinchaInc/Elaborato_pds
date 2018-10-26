@@ -1,18 +1,15 @@
 package model
 
-import java.time.Year
-
-class Course(val name: String, val year: Year) {
-    val students = ArrayList<Student>()
-    val professors = ArrayList<Professor>()
-    val tutors = ArrayList<Tutor>()
-    val workTracks = ArrayList<WorkTrack>()
-    val groups = ArrayList<Group>()
+class Course(val name: String, val year: Int) {
+    private val students = ArrayList<Student>()
+    private val professors = ArrayList<Professor>()
+    private val tutors = ArrayList<Tutor>()
+    private val workTracks = ArrayList<WorkTrack>()
+    private val groups = ArrayList<Group>()
 
     fun addStudent(student: Student) {
         if (
-            student.course == null
-            && !students.contains(student)
+            !students.contains(student)
             && students.none { it.id == student.id }
         ) {
             students.add(student)
@@ -28,7 +25,10 @@ class Course(val name: String, val year: Year) {
     }
 
     fun addGroup(group: Group) {
-        if (!groups.contains(group))
+        if (
+            !groups.contains(group)
+            && groups.none { it.name == group.name }
+        )
             groups.add(group)
     }
 
@@ -72,4 +72,24 @@ class Course(val name: String, val year: Year) {
             }
         }
     }
+
+    fun studentsSize() = students.size
+
+    fun professorsSize() = professors.size
+
+    fun tutorsSize() = tutors.size
+
+    fun workTracksSize() = workTracks.size
+
+    fun groupsSize() = groups.size
+
+    fun getStudents() = students.toArray()
+
+    fun getProfessors() = professors.toArray()
+
+    fun getTutors() = tutors.toArray()
+
+    fun getWorkTracks() = workTracks.toArray()
+
+    fun getGroups() = groups.toArray()
 }
