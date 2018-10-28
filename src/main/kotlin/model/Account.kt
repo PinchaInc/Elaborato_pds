@@ -6,4 +6,6 @@ data class Account(var username: String, var password: Int) {
         if (oldPassword.hashCode() == password && newPassword == repeatPassword)
             password = newPassword.hashCode()
     }
+
+    fun authenticate(password: String): Boolean = password.hashCode() == this.password
 }

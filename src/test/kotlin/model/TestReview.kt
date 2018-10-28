@@ -9,7 +9,7 @@ class TestReview {
     @Test
     fun testSetMeeting() {
         val review = Review("title", "body")
-        val group = Group("group", arrayOf())
+        val group = Group("group")
         val meeting1 = Meeting(group, Date(), Date())
         review.meeting = meeting1
         assertEquals(meeting1, review.meeting)

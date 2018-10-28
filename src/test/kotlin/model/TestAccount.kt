@@ -1,6 +1,8 @@
 package model
 
 import junit.framework.TestCase.assertEquals
+import junit.framework.TestCase.assertFalse
+import junit.framework.TestCase.assertTrue
 import org.junit.Test
 
 class TestAccount {
@@ -33,5 +35,21 @@ class TestAccount {
         account.passwd("error", newPassword, newPassword)
 
         assertEquals(password.hashCode(), account.password)
+    }
+
+    @Test
+    fun testAuthenticate() {
+        val password = "password"
+        val account = Account("Username", password.hashCode())
+        val auth = account.authenticate(password)
+        assertTrue(auth)
+    }
+
+    @Test
+    fun testAuthenticateError() {
+        val password = "password"
+        val account = Account("Username", password.hashCode())
+        val auth = account.authenticate("error")
+        assertFalse(auth)
     }
 }

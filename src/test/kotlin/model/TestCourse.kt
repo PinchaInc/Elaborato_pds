@@ -1,8 +1,10 @@
 package model
 
 import junit.framework.TestCase.assertEquals
+import junit.framework.TestCase.assertFalse
 import junit.framework.TestCase.assertNotSame
 import junit.framework.TestCase.assertNull
+import junit.framework.TestCase.assertTrue
 import org.junit.Test
 import java.util.Date
 
@@ -13,12 +15,12 @@ class TestCourse {
         val course = Course("course", 0)
         val student1 = Student("name1", "surname1", 1)
         val student2 = Student("name2", "surname2", 2)
-        course.addStudent(student1)
+        assertTrue(course.addStudent(student1))
         assertEquals(1, course.studentsSize())
         assertEquals(course, student1.course)
-        course.addStudent(student1)
+        assertFalse(course.addStudent(student1))
         assertEquals(1, course.studentsSize())
-        course.addStudent(student2)
+        assertTrue(course.addStudent(student2))
         assertEquals(2, course.studentsSize())
         course.removeStudent(student1)
         assertEquals(1, course.studentsSize())
@@ -30,8 +32,8 @@ class TestCourse {
         val course = Course("course", 0)
         val student1 = Student("name1", "surname1", 1)
         val student2 = Student("name2", "surname2", 1)
-        course.addStudent(student1)
-        course.addStudent(student2)
+        assertTrue(course.addStudent(student1))
+        assertFalse(course.addStudent(student2))
         assertEquals(1, course.studentsSize())
     }
 
@@ -41,18 +43,19 @@ class TestCourse {
         val course2 = Course("course2", 0)
         val student = Student("name", "surname", 1)
         student.course = course1
-        course2.addStudent(student)
+        assertTrue(course2.addStudent(student))
         assertEquals(0, course1.studentsSize())
         assertEquals(1, course2.studentsSize())
+        assertEquals(course2, student.course)
     }
 
     @Test
     fun testAddAndRemoveGroup() {
         val course = Course("course", 0)
-        val group = Group("group", arrayOf())
-        course.addGroup(group)
+        val group = Group("group")
+        assertTrue(course.addGroup(group))
         assertEquals(1, course.groupsSize())
-        course.addGroup(group)
+        assertFalse(course.addGroup(group))
         assertEquals(1, course.groupsSize())
         course.removeGroup(group)
         assertEquals(0, course.groupsSize())
@@ -61,12 +64,10 @@ class TestCourse {
     @Test
     fun testAddGroupErrorSameName() {
         val course = Course("course", 0)
-        val group1 = Group("group", arrayOf())
-        val group2 = Group("group", arrayOf(
-            Student("name", "surname", 1)
-        ))
-        course.addGroup(group1)
-        course.addGroup(group2)
+        val group1 = Group("group")
+        val group2 = Group("group", Student("name", "surname", 1))
+        assertTrue(course.addGroup(group1))
+        assertFalse(course.addGroup(group2))
         assertNotSame(group1, group2)
         assertEquals(1, course.groupsSize())
 
@@ -76,9 +77,9 @@ class TestCourse {
     fun testAddAndRemoveWorkTrack() {
         val course = Course("course", 0)
         val workTrack = WorkTrack("title", "body")
-        course.addWorkTrack(workTrack)
+        assertTrue(course.addWorkTrack(workTrack))
         assertEquals(1, course.workTracksSize())
-        course.addWorkTrack(workTrack)
+        assertFalse(course.addWorkTrack(workTrack))
         assertEquals(1, course.workTracksSize())
         course.removeWorkTrack(workTrack)
         assertEquals(0, course.workTracksSize())
@@ -94,10 +95,10 @@ class TestCourse {
             "email",
             1
         )
-        course.addTeacher(professor)
+        assertTrue(course.addTeacher(professor))
         assertEquals(1, course.professorsSize())
         assertEquals(0, course.tutorsSize())
-        course.addTeacher(professor)
+        assertFalse(course.addTeacher(professor))
         assertEquals(1, course.professorsSize())
         assertEquals(0, course.tutorsSize())
         course.removeTeacher(professor)
@@ -114,10 +115,10 @@ class TestCourse {
             "email",
             1
         )
-        course.addTeacher(tutor)
+        assertTrue(course.addTeacher(tutor))
         assertEquals(0, course.professorsSize())
         assertEquals(1, course.tutorsSize())
-        course.addTeacher(tutor)
+        assertFalse(course.addTeacher(tutor))
         assertEquals(0, course.professorsSize())
         assertEquals(1, course.tutorsSize())
         course.removeTeacher(tutor)

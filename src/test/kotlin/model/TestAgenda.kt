@@ -18,7 +18,7 @@ class TestAgenda {
         val agenda = Agenda(tutor)
 
         val meeting = Meeting(
-            Group("group", arrayOf()),
+            Group("group"),
             Date(),
             Date()
         )

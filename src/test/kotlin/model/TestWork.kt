@@ -9,7 +9,7 @@ class TestWork {
 
     @Test
     fun testAddAndRemoveReview() {
-        val group = Group("group", arrayOf())
+        val group = Group("group")
         val workTrack = WorkTrack("title", "body")
         val review = Review("title", "body")
         val work = Work(group, workTrack)
@@ -25,7 +25,7 @@ class TestWork {
 
     @Test
     fun testCreateWork() {
-        val group = Group("group", arrayOf())
+        val group = Group("group")
         val workTrack = WorkTrack("title", "body")
         val work = Work.createWork(group, workTrack)
         assertNotNull(work)
@@ -33,7 +33,7 @@ class TestWork {
 
     @Test
     fun testCreateWorkErrorBusyGroup() {
-        val group = Group("group", arrayOf())
+        val group = Group("group")
         val workTrack1 = WorkTrack("title1", "body1")
         val workTrack2 = WorkTrack("title2", "body2")
         val work1 = Work.createWork(group, workTrack1)

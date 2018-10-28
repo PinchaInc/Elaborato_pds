@@ -1,7 +1,8 @@
 package model
 
-class Group(var name: String, val members: Array<Student>) {
-    val meetings = ArrayList<Meeting>()
+class Group(var name: String, vararg students: Student) {
+    private val members = ArrayList<Student>()
+    private val meetings = ArrayList<Meeting>()
     var work: Work? = null
         set(work) {
             if (field == null)
@@ -9,7 +10,10 @@ class Group(var name: String, val members: Array<Student>) {
         }
 
     init {
-        members.forEach { it.group = this }
+        students.forEach {
+            it.group = this
+            members.add(it)
+        }
     }
 
     fun addMeeting(meeting: Meeting) {
@@ -24,10 +28,18 @@ class Group(var name: String, val members: Array<Student>) {
         }
     }
 
+    fun membersSize() = members.size
+
+    fun meetingsSize() = meetings.size
+
+    fun getMembers() = members.toArray()
+
+    fun getMeetings() = meetings.toArray()
+
     companion object {
         fun createGroup(name: String, vararg students: Student): Group? {
             return if (students.isNotEmpty() && students.none { it.group != null })
-                Group(name, students.toList().toTypedArray())
+                Group(name, *students.toList().toTypedArray())
             else null
         }
     }

@@ -8,7 +8,7 @@ class TestMeeting {
 
     @Test
     fun testSetReview() {
-        val group = Group("group", arrayOf())
+        val group = Group("group")
         val meeting = Meeting(group, Date(), Date())
         val review1 = Review("title1", "body1")
         val review2 = Review("title2", "body2")
