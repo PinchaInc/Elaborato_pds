@@ -3,7 +3,6 @@ package controllers
 import model.Review
 
 interface GroupsController {
-    fun setApplication(app: Application): GroupsController
     fun start()
     fun startStudents()
     fun startAgenda()

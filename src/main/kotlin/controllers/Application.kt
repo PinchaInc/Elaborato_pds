@@ -8,35 +8,28 @@ abstract class Application {
     var studentsController: Lazy<StudentsController>? = null
     var agendaController: Lazy<AgendaController>? = null
     var groupsController: Lazy<GroupsController>? = null
-    val isLogged: Boolean = TODO()
 
     fun start() {
         val controllersFactory = makeControllersFactory(
             makeViewsFactory(),
-            makeModel()
+            makeModel(),
+            this
         )
 
         loginController = lazy {
             controllersFactory.createLoginController()
-                .setApplication(this)
         }
         studentsController = lazy {
             controllersFactory.createStudentsController()
-                .setApplication(this)
         }
         agendaController = lazy {
             controllersFactory.createAgendaController()
-                .setApplication(this)
         }
         groupsController = lazy {
             controllersFactory.createGroupsController()
-                .setApplication(this)
         }
 
-        if (isLogged)
-            startStudents()
-        else
-            startLogin()
+        startLogin()
     }
 
     fun startLogin() {
@@ -55,9 +48,11 @@ abstract class Application {
         groupsController?.value?.start()
     }
 
-    protected open fun makeControllersFactory(viewsFactory: ViewsFactory, model: Model): ControllersFactory {
-        TODO()
-    }
+    protected open fun makeControllersFactory(
+        viewsFactory: ViewsFactory,
+        model: Model,
+        application: Application
+    ): ControllersFactory = TODO()
 
     protected open fun makeModel(): Model {
         TODO()

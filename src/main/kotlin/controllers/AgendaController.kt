@@ -3,7 +3,6 @@ package controllers
 import java.util.Date
 
 interface AgendaController {
-    fun setApplication(app: Application): AgendaController
     fun start()
     fun startStudents()
     fun startGroups()
