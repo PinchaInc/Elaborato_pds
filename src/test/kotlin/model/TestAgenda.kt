@@ -24,10 +24,10 @@ class TestAgenda {
         )
 
         agenda.addMeeting(meeting)
-        assertEquals(1, agenda.meetings.size)
+        assertEquals(1, agenda.meetingSize())
         agenda.addMeeting(meeting)
-        assertEquals(1, agenda.meetings.size)
+        assertEquals(1, agenda.meetingSize())
         agenda.removeMeeting(meeting)
-        assertEquals(0, agenda.meetings.size)
+        assertEquals(0, agenda.meetingSize())
     }
 }
