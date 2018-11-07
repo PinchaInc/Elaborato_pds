@@ -12,6 +12,14 @@ import java.util.Date
 
 open class TestControllersHelper {
     val modelError = object : Model {
+        override fun loadUser(username: String): Boolean {
+            return false
+        }
+
+        override fun checkGroupName(groupName: String): Boolean {
+            return false
+        }
+
         override fun getGroup(groupID: Int): Group? {
             return null
         }
@@ -42,6 +50,14 @@ open class TestControllersHelper {
     }
 
     val model = object : Model {
+        override fun loadUser(username: String): Boolean {
+            return true
+        }
+
+        override fun checkGroupName(groupName: String): Boolean {
+            return true
+        }
+
         val group = Group("name")
         val meeting = Meeting(group, Date(), Date())
 

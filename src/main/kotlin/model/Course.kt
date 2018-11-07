@@ -8,10 +8,7 @@ class Course(val name: String, val year: Int) {
     private val groups = ArrayList<Group>()
 
     fun addStudent(student: Student): Boolean {
-        return if (
-            !students.contains(student)
-            && students.none { it.id == student.id }
-        ) {
+        return if (students.none { it.id == student.id }) {
             students.add(student)
             student.course = this
             true
@@ -26,10 +23,7 @@ class Course(val name: String, val year: Int) {
     }
 
     fun addGroup(group: Group): Boolean {
-        return if (
-            !groups.contains(group)
-            && groups.none { it.name == group.name }
-        ) {
+        return if (groups.none { it.name == group.name }) {
             groups.add(group)
             true
         } else false

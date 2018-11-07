@@ -24,7 +24,11 @@ class ConcreteLoginController(
         val account = model.getAccount(username)
         if (account == null || !account.authenticate(password))
             view.showMessage("Error", MessageType.ERROR)
-        else
-            view.showMessage("ok")
+        else {
+            if (model.loadUser(username))
+                application.startStudents()
+            else
+                view.showMessage("error", MessageType.ERROR)
+        }
     }
 }
