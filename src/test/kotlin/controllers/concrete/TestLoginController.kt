@@ -7,20 +7,14 @@ import model.Model
 import org.junit.Test
 import views.LoginView
 
-class TestLoginController: TestControllersHelper() {
+class TestLoginController : TestControllersHelper() {
 
     val viewOk = object : LoginView {
-        override fun start() {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+        override fun start() {}
 
-        override fun setController(controller: LoginController) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+        override fun setController(controller: LoginController) {}
 
-        override fun setModel(model: Model) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+        override fun setModel(model: Model) {}
 
         override fun showMessage(message: String, type: MessageType) {
             assertEquals(MessageType.STANDARD, type)
@@ -28,17 +22,11 @@ class TestLoginController: TestControllersHelper() {
     }
 
     val viewError = object : LoginView {
-        override fun start() {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+        override fun start() {}
 
-        override fun setController(controller: LoginController) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+        override fun setController(controller: LoginController) {}
 
-        override fun setModel(model: Model) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+        override fun setModel(model: Model) {}
 
         override fun showMessage(message: String, type: MessageType) {
             assertEquals(MessageType.ERROR, type)

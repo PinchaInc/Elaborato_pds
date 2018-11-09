@@ -12,6 +12,14 @@ import java.util.Date
 
 open class TestControllersHelper {
     val modelError = object : Model {
+        override fun getStudents(): Array<Student> {
+            return ArrayList<Student>().toTypedArray()
+        }
+
+        override fun getGroups(): Array<Group> {
+            return ArrayList<Group>().toTypedArray()
+        }
+
         override fun loadUser(username: String): Boolean {
             return false
         }
@@ -50,6 +58,14 @@ open class TestControllersHelper {
     }
 
     val model = object : Model {
+        override fun getStudents(): Array<Student> {
+            return ArrayList<Student>().toTypedArray()
+        }
+
+        override fun getGroups(): Array<Group> {
+            return ArrayList<Group>().toTypedArray()
+        }
+
         override fun loadUser(username: String): Boolean {
             return true
         }
@@ -70,7 +86,7 @@ open class TestControllersHelper {
         }
 
         override fun getMeeting(meetingID: Int): Meeting? {
-            return  meeting
+            return meeting
         }
 
         override fun getAccount(username: String): Account? {

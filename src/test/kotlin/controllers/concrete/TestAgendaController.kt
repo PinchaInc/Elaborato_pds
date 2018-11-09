@@ -13,21 +13,13 @@ import java.util.Date
 class TestAgendaController : TestControllersHelper() {
 
     val viewOk = object : AgendaView {
-        override fun start() {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+        override fun start() {}
 
-        override fun selectGroup() {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+        override fun selectGroup() {}
 
-        override fun setController(controller: AgendaController) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+        override fun setController(controller: AgendaController) {}
 
-        override fun setModel(model: Model) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+        override fun setModel(model: Model) {}
 
         override fun showMessage(message: String, type: MessageType) {
             assertEquals(MessageType.STANDARD, type)
@@ -35,21 +27,13 @@ class TestAgendaController : TestControllersHelper() {
     }
 
     val viewError = object : AgendaView {
-        override fun start() {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+        override fun start() {}
 
-        override fun selectGroup() {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+        override fun selectGroup() {}
 
-        override fun setController(controller: AgendaController) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+        override fun setController(controller: AgendaController) {}
 
-        override fun setModel(model: Model) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+        override fun setModel(model: Model) {}
 
         override fun showMessage(message: String, type: MessageType) {
             assertEquals(MessageType.ERROR, type)

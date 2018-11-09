@@ -12,6 +12,11 @@ class ConcreteLoginController(
     private val application: Application
 ) : LoginController {
 
+    init {
+        view.setModel(model)
+        view.setController(this)
+    }
+
     override fun start() = view.start()
 
     override fun startAgenda() = application.startAgenda()

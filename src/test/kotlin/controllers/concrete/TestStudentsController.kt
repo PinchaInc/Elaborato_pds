@@ -14,13 +14,9 @@ class TestStudentsController: TestControllersHelper() {
             TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
 
-        override fun setController(controller: StudentsController) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+        override fun setController(controller: StudentsController) {}
 
-        override fun setModel(model: Model) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+        override fun setModel(model: Model) {}
 
         override fun showMessage(message: String, type: MessageType) {
             assertEquals(MessageType.STANDARD, type)
@@ -44,13 +40,9 @@ class TestStudentsController: TestControllersHelper() {
             TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
 
-        override fun setController(controller: StudentsController) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+        override fun setController(controller: StudentsController) {}
 
-        override fun setModel(model: Model) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+        override fun setModel(model: Model) {}
 
         override fun showMessage(message: String, type: MessageType) {
             assertEquals(MessageType.ERROR, type)

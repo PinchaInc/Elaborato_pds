@@ -15,6 +15,11 @@ class ConcreteGroupsController(
     private val application: Application
 ) : GroupsController {
 
+    init {
+        view.setModel(model)
+        view.setController(this)
+    }
+
     override fun start() = view.start()
 
     override fun startStudents() = application.startStudents()

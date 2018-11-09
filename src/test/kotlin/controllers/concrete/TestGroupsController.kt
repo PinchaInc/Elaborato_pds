@@ -11,17 +11,11 @@ import java.util.Date
 class TestGroupsController : TestControllersHelper() {
 
     val viewOk = object : GroupsView {
-        override fun start() {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+        override fun start() {}
 
-        override fun setController(controller: GroupsController) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+        override fun setController(controller: GroupsController) {}
 
-        override fun setModel(model: Model) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+        override fun setModel(model: Model) {}
 
         override fun showMessage(message: String, type: MessageType) {
             assertEquals(MessageType.STANDARD, type)
@@ -29,17 +23,11 @@ class TestGroupsController : TestControllersHelper() {
     }
 
     val viewError = object : GroupsView {
-        override fun start() {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+        override fun start() {}
 
-        override fun setController(controller: GroupsController) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+        override fun setController(controller: GroupsController) {}
 
-        override fun setModel(model: Model) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+        override fun setModel(model: Model) {}
 
         override fun showMessage(message: String, type: MessageType) {
             assertEquals(MessageType.ERROR, type)

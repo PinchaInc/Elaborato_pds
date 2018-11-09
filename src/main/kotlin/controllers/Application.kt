@@ -1,5 +1,6 @@
 package controllers
 
+import controllers.concrete.ConcreteControllersFactory
 import model.Model
 import views.ViewsFactory
 
@@ -52,7 +53,11 @@ abstract class Application {
         viewsFactory: ViewsFactory,
         model: Model,
         application: Application
-    ): ControllersFactory = TODO()
+    ): ControllersFactory = ConcreteControllersFactory(
+        viewsFactory,
+        model,
+        application
+    )
 
     protected open fun makeModel(): Model {
         TODO()

@@ -11,4 +11,6 @@ interface Model {
     fun addGroup(group: Group): Boolean
     fun checkGroupName(groupName: String): Boolean
     fun loadUser(username: String): Boolean
+    fun getStudents(): Array<Student>
+    fun getGroups(): Array<Group>
 }

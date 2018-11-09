@@ -14,6 +14,11 @@ class ConcreteStudentsController(
     private val application: Application
 ) : StudentsController {
 
+    init {
+        view.setModel(model)
+        view.setController(this)
+    }
+
     override fun start() = view.start()
 
     override fun startAgenda() = application.startAgenda()
