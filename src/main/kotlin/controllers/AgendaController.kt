@@ -1,10 +1,8 @@
 package controllers
 
-import java.util.Date
-
 interface AgendaController {
     fun start()
     fun startStudents()
     fun startGroups()
-    fun addMeeting(groupID: Int, stratDate: Date, endDate: Date)
+    fun addReview(meetingID: Int, reviewTitle: String, reviewBody: String, reviewRating: Int? = null)
 }

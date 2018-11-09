@@ -1,9 +1,11 @@
 package controllers
 
+import java.util.Date
+
 interface GroupsController {
     fun start()
     fun startStudents()
     fun startAgenda()
     fun assignWork(groupID: Int, workTrackID: Int)
-    fun addReview(meetingID: Int, reviewTitle: String, reviewBody: String, reviewRating: Int? = null)
+    fun addMeeting(groupID: Int, stratDate: Date, endDate: Date)
 }

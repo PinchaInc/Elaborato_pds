@@ -2,13 +2,15 @@ package controllers.concrete
 
 import Util.MessageType
 import controllers.AgendaController
+import junit.framework.TestCase
 import junit.framework.TestCase.assertEquals
+import model.FinalReview
 import model.Model
 import org.junit.Test
 import views.AgendaView
 import java.util.Date
 
-class TestAgendaController: TestControllersHelper() {
+class TestAgendaController : TestControllersHelper() {
 
     val viewOk = object : AgendaView {
         override fun start() {
@@ -54,16 +56,34 @@ class TestAgendaController: TestControllersHelper() {
         }
     }
 
+    val controllerOk = ConcreteAgendaController(viewOk, model, app)
+    val controllerError = ConcreteAgendaController(viewError, modelError, app)
+
     @Test
-    fun testAddMeeting() {
-        val controller = ConcreteAgendaController(viewOk, model, app)
-        controller.addMeeting(1, Date(), Date())
+    fun testAddReview() {
+        controllerOk.addReview(1, "title", "body")
+        val meeting = model.getMeeting(1)
+        val review = meeting!!.review
+        TestCase.assertNotNull(review)
+        TestCase.assertTrue(review !is FinalReview)
     }
 
     @Test
-    fun testAddMeetingError() {
-        val controller = ConcreteAgendaController(viewError, modelError, app)
-        controller.addMeeting(1, Date(), Date())
+    fun testAddReviewError() {
+        controllerError.addReview(1, "title", "body")
     }
 
+    @Test
+    fun testAddFinalReview() {
+        controllerOk.addReview(1, "title", "body", 10)
+        val meeting = model.getMeeting(1)
+        val review = meeting!!.review
+        TestCase.assertNotNull(review)
+        TestCase.assertTrue(review is FinalReview)
+    }
+
+    @Test
+    fun testAddFinalReviewError() {
+        controllerError.addReview(1, "title", "body", 10)
+    }
 }

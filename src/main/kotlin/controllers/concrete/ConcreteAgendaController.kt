@@ -3,10 +3,10 @@ package controllers.concrete
 import Util.MessageType
 import controllers.AgendaController
 import controllers.Application
+import model.FinalReview
 import model.Model
-import model.Meeting
+import model.Review
 import views.AgendaView
-import java.util.Date
 
 class ConcreteAgendaController(
     private val view: AgendaView,
@@ -20,11 +20,14 @@ class ConcreteAgendaController(
 
     override fun startGroups() = application.startGroups()
 
-    override fun addMeeting(groupID: Int, stratDate: Date, endDate: Date) {
-        val group = model.getGroup(groupID)
-        if (group != null){
-            Meeting(group, stratDate, endDate)
-            view.showMessage("OK")
+    override fun addReview(meetingID: Int, reviewTitle: String, reviewBody: String, reviewRating: Int?) {
+        val meeting = model.getMeeting(meetingID)
+        if (meeting != null) {
+            val review = if (reviewRating == null)
+                Review(reviewTitle, reviewBody)
+            else FinalReview(reviewTitle, reviewBody, reviewRating)
+            meeting.review = review
+            view.showMessage("ok")
         } else
             view.showMessage("error", MessageType.ERROR)
     }

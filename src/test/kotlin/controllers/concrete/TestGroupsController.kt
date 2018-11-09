@@ -3,14 +3,12 @@ package controllers.concrete
 import Util.MessageType
 import controllers.GroupsController
 import junit.framework.TestCase.assertEquals
-import junit.framework.TestCase.assertNotNull
-import junit.framework.TestCase.assertTrue
-import model.FinalReview
 import model.Model
 import org.junit.Test
 import views.GroupsView
+import java.util.Date
 
-class TestGroupsController: TestControllersHelper() {
+class TestGroupsController : TestControllersHelper() {
 
     val viewOk = object : GroupsView {
         override fun start() {
@@ -62,30 +60,12 @@ class TestGroupsController: TestControllersHelper() {
     }
 
     @Test
-    fun testAddReview() {
-        controllerOk.addReview(1, "title", "body")
-        val meeting = model.getMeeting(1)
-        val review = meeting!!.review
-        assertNotNull(review)
-        assertTrue(review !is FinalReview)
+    fun testAddMeeting() {
+        controllerOk.addMeeting(1, Date(), Date())
     }
 
     @Test
-    fun testAddReviewError() {
-        controllerError.addReview(1, "title", "body")
-    }
-
-    @Test
-    fun testAddFinalReview() {
-        controllerOk.addReview(1, "title", "body", 10)
-        val meeting = model.getMeeting(1)
-        val review = meeting!!.review
-        assertNotNull(review)
-        assertTrue(review is FinalReview)
-    }
-
-    @Test
-    fun testAddFinalReviewError() {
-        controllerError.addReview(1, "title", "body", 10)
+    fun testAddMeetingError() {
+        controllerError.addMeeting(1, Date(), Date())
     }
 }

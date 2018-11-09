@@ -3,11 +3,11 @@ package controllers.concrete
 import Util.MessageType
 import controllers.Application
 import controllers.GroupsController
-import model.FinalReview
+import model.Meeting
 import model.Model
-import model.Review
 import model.Work
 import views.GroupsView
+import java.util.Date
 
 class ConcreteGroupsController(
     private val view: GroupsView,
@@ -31,14 +31,11 @@ class ConcreteGroupsController(
             view.showMessage("error", MessageType.ERROR)
     }
 
-    override fun addReview(meetingID: Int, reviewTitle: String, reviewBody: String, reviewRating: Int?) {
-        val meeting = model.getMeeting(meetingID)
-        if (meeting != null) {
-            val review = if (reviewRating == null)
-                Review(reviewTitle, reviewBody)
-            else FinalReview(reviewTitle, reviewBody, reviewRating)
-            meeting.review = review
-            view.showMessage("ok")
+    override fun addMeeting(groupID: Int, stratDate: Date, endDate: Date) {
+        val group = model.getGroup(groupID)
+        if (group != null) {
+            Meeting(group, stratDate, endDate)
+            view.showMessage("OK")
         } else
             view.showMessage("error", MessageType.ERROR)
     }
