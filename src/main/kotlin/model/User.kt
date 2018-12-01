@@ -9,6 +9,7 @@ sealed class User(
     var email: String,
     var id: Int
 ) {
+    var course: Course? = null
     var account: Account? = null
     var agenda: Agenda? = null
 

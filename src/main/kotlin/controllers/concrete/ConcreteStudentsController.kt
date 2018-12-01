@@ -27,8 +27,7 @@ class ConcreteStudentsController(
 
     override fun addStudent(name: String, surname: String, id: Int) {
         val student = Student(name, surname, id)
-        val bool = model.addStudent(student)
-        if (bool)
+        if (model.addStudent(student))
             view.showMessage("ok")
         else
             view.showMessage("error", MessageType.ERROR)
@@ -39,8 +38,7 @@ class ConcreteStudentsController(
         if (students.none { it == null }) {
             val group = Group.createGroup(groupName, *students.map { it!! }.toTypedArray())
             if (group != null) {
-                val bool = model.addGroup(group)
-                if (bool)
+                if (model.addGroup(group))
                     view.showMessage("OK")
                 else
                     view.showMessage("error", MessageType.ERROR)
