@@ -5,49 +5,27 @@ import model.Model
 import views.ViewsFactory
 
 abstract class Application {
-    var loginController: Lazy<LoginController>? = null
-    var studentsController: Lazy<StudentsController>? = null
-    var agendaController: Lazy<AgendaController>? = null
-    var groupsController: Lazy<GroupsController>? = null
-
-    fun start() {
-        val controllersFactory = makeControllersFactory(
+    val factory by lazy {
+        makeControllersFactory(
             makeViewsFactory(),
             makeModel(),
             this
         )
-
-        loginController = lazy {
-            controllersFactory.createLoginController()
-        }
-        studentsController = lazy {
-            controllersFactory.createStudentsController()
-        }
-        agendaController = lazy {
-            controllersFactory.createAgendaController()
-        }
-        groupsController = lazy {
-            controllersFactory.createGroupsController()
-        }
-
-        startLogin()
     }
+    val loginController by lazy { factory.createLoginController() }
+    val studentsController by lazy { factory.createStudentsController() }
+    val agendaController by lazy { factory.createAgendaController() }
+    val groupsController by lazy { factory.createGroupsController() }
 
-    fun startLogin() {
-        loginController?.value?.start()
-    }
+    fun start() = startLogin()
 
-    fun startStudents() {
-        studentsController?.value?.start()
-    }
+    fun startLogin() = loginController.start()
 
-    fun startAgenda() {
-        agendaController?.value?.start()
-    }
+    fun startStudents() = studentsController.start()
 
-    fun startGroups() {
-        groupsController?.value?.start()
-    }
+    fun startAgenda() = agendaController.start()
+
+    fun startGroups() = groupsController.start()
 
     protected open fun makeControllersFactory(
         viewsFactory: ViewsFactory,
