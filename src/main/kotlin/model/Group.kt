@@ -1,7 +1,7 @@
 package model
 
 class Group(var name: String, vararg students: Student) {
-    var course: Course? = null
+    var group: Group? = null
     private val members = ArrayList<Student>()
     private val meetings = ArrayList<Meeting>()
     var work: Work? = null
