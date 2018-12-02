@@ -8,7 +8,7 @@ import org.junit.Test
 
 class TestCourseDao {
 
-    val dao = CourseDao()
+    val dao = CourseDao(DaoFactory())
 
     @Test
     fun testCreate() {
@@ -18,10 +18,12 @@ class TestCourseDao {
 
     @Test
     fun testRead() {
-        val course = dao.read(Pair("test1", 1001))
+        val course = dao.read(Pair("Functional Programming", 2019))
         assertNotNull(course)
-        assertEquals("test1", course?.name)
-        assertEquals(1001, course?.year)
+        assertEquals(1, course?.tutorsSize())
+        assertEquals(2, course?.professorsSize())
+        assertEquals(3, course?.groupsSize())
+        assertEquals(8, course?.studentsSize())
     }
 
     @Test

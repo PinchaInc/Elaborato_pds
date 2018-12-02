@@ -4,6 +4,7 @@ import model.Professor
 import model.Tutor
 import model.User
 import repository.Dao
+import java.sql.PreparedStatement
 import java.sql.SQLException
 import java.util.Date
 
@@ -101,5 +102,15 @@ class UserDao : Dao<User, Int> {
             return false
         }
         return true
+    }
+
+    override fun filterBy(stm: PreparedStatement): List<Int> {
+        val result = stm.executeQuery()
+        val ids = ArrayList<Int>()
+
+        while (result.next())
+            ids.add(result.getInt(1))
+
+        return ids
     }
 }

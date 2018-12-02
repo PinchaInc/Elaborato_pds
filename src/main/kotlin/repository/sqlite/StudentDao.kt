@@ -2,6 +2,7 @@ package repository.sqlite
 
 import model.Student
 import repository.Dao
+import java.sql.PreparedStatement
 import java.sql.SQLException
 
 class StudentDao : Dao<Student, Int> {
@@ -90,5 +91,15 @@ class StudentDao : Dao<Student, Int> {
             return false
         }
         return true
+    }
+
+    override fun filterBy(stm: PreparedStatement): List<Int> {
+        val result = stm.executeQuery()
+        val ids = ArrayList<Int>()
+
+        while (result.next())
+            ids.add(result.getInt(1))
+
+        return ids
     }
 }
