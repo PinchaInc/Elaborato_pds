@@ -33,9 +33,9 @@ class Group(var name: String, vararg students: Student) {
 
     fun meetingsSize() = meetings.size
 
-    fun getMembers() = members.toArray()
+    fun getMembers() = members.toTypedArray()
 
-    fun getMeetings() = meetings.toArray()
+    fun getMeetings() = meetings.toTypedArray()
 
     companion object {
         fun createGroup(name: String, vararg students: Student): Group? {

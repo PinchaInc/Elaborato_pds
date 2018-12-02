@@ -15,7 +15,7 @@ data class Agenda(val owner: User) {
 
     fun meetingSize() = meetings.size
 
-    fun getMeetings() = meetings.toArray()
+    fun getMeetings() = meetings.toTypedArray()
 
     fun getMeeting(meetingID: Int): Meeting? {
         return if (meetings.size > meetingID)

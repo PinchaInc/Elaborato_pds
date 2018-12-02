@@ -87,15 +87,15 @@ class Course(val name: String, val year: Int) {
 
     fun groupsSize() = groups.size
 
-    fun getStudents() = students.toArray()
+    fun getStudents() = students.toTypedArray()
 
-    fun getProfessors() = professors.toArray()
+    fun getProfessors() = professors.toTypedArray()
 
-    fun getTutors() = tutors.toArray()
+    fun getTutors() = tutors.toTypedArray()
 
-    fun getWorkTracks() = workTracks.toArray()
+    fun getWorkTracks() = workTracks.toTypedArray()
 
-    fun getGroups() = groups.toArray()
+    fun getGroups() = groups.toTypedArray()
 
     fun getStudent(studentID: Int): Student? {
         return if (students.size > studentID)
