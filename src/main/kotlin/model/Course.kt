@@ -35,8 +35,7 @@ class Course(val name: String, val year: Int) {
     }
 
     fun addWorkTrack(workTrack: WorkTrack): Boolean {
-        return if (workTrack.id == null && !workTracks.contains(workTrack)) {
-            workTrack.id = workTracks.size
+        return if (workTracks.none { it.id == workTrack.id}) {
             workTracks.add(workTrack)
             workTrack.course = this
             true
@@ -56,7 +55,7 @@ class Course(val name: String, val year: Int) {
                     true
                 } else false
             }
-            is Tutor-> {
+            is Tutor -> {
                 return if (!tutors.contains(teacher)) {
                     tutors.add(teacher)
                     true

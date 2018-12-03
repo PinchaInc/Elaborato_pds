@@ -1,6 +1,11 @@
 package model
 
 data class Agenda(val owner: User) {
+
+    init {
+        owner.agenda = this
+    }
+
     private val meetings: ArrayList<Meeting> = ArrayList()
 
     fun addMeeting(meeting: Meeting) {

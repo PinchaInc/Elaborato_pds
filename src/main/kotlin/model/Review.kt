@@ -1,7 +1,7 @@
 package model
 
 open class Review(val title: String, val body: String) {
-    private var id: Int? = null
+    var id: Int? = null
     var group: Group? = null
     var meeting: Meeting? = null
         set(m) {
