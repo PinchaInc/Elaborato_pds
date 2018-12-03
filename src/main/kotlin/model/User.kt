@@ -5,7 +5,6 @@ import java.util.Date
 sealed class User(
     val name: String,
     val surname: String,
-    val birthDate: Date,
     var email: String,
     var id: Int
 ) {
@@ -21,15 +20,13 @@ sealed class User(
 class Tutor(
     name: String,
     surname: String,
-    birthDate: Date,
     email: String,
     id: Int
-): User(name, surname, birthDate, email, id)
+): User(name, surname, email, id)
 
 class Professor(
     name: String,
     surname: String,
-    birthDate: Date,
     email: String,
     id: Int
-): User(name, surname, birthDate, email, id)
+): User(name, surname, email, id)

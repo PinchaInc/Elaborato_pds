@@ -1,6 +1,7 @@
 package model
 
 class Group(var name: String, vararg students: Student) {
+    private var meetingCount = 0
     var course: Course? = null
     private val members = ArrayList<Student>()
     private val meetings = ArrayList<Meeting>()
@@ -17,10 +18,12 @@ class Group(var name: String, vararg students: Student) {
         }
     }
 
-    fun addMeeting(meeting: Meeting) {
-        if (!meetings.contains(meeting)) {
+    fun addMeeting(meeting: Meeting): Boolean {
+        if (!meetings.contains(meeting) && meetingCount < 4) {
             meetings.add(meeting)
-        }
+            return true
+        } else
+            return false
     }
 
     fun removeMeeting(meeting: Meeting) {
@@ -36,6 +39,11 @@ class Group(var name: String, vararg students: Student) {
     fun getMembers() = members.toTypedArray()
 
     fun getMeetings() = meetings.toTypedArray()
+
+    fun increaseMeeting(): Int {
+        meetingCount++
+        return meetingCount
+    }
 
     companion object {
         fun createGroup(name: String, vararg students: Student): Group? {

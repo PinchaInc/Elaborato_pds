@@ -4,8 +4,10 @@ data class Agenda(val owner: User) {
     private val meetings: ArrayList<Meeting> = ArrayList()
 
     fun addMeeting(meeting: Meeting) {
-        if (!meetings.contains(meeting))
+        if (!meetings.contains(meeting)) {
             meetings.add(meeting)
+            meeting.owner = owner
+        }
     }
 
     fun removeMeeting(meeting: Meeting) {

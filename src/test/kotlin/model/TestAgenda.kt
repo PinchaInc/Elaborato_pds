@@ -11,7 +11,6 @@ class TestAgenda {
         val tutor = Tutor(
             "name",
             "surname",
-            Date(),
             "email",
             1
         )

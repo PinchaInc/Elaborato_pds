@@ -91,7 +91,6 @@ class TestCourse {
         val professor = Professor(
             "name",
             "surname",
-            Date(),
             "email",
             1
         )
@@ -111,7 +110,6 @@ class TestCourse {
         val tutor = Tutor(
             "name",
             "surname",
-            Date(),
             "email",
             1
         )

@@ -35,8 +35,10 @@ class Course(val name: String, val year: Int) {
     }
 
     fun addWorkTrack(workTrack: WorkTrack): Boolean {
-        return if (!workTracks.contains(workTrack)) {
+        return if (workTrack.id == null && !workTracks.contains(workTrack)) {
+            workTrack.id = workTracks.size
             workTracks.add(workTrack)
+            workTrack.course = this
             true
         } else false
     }
