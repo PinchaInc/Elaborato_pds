@@ -22,7 +22,7 @@ public class AgendaSwing implements AgendaView {
 
     @Override
     public void start() {
-        JFrame frame = Frame.getIstance().getFrame();
+        JFrame frame = Frame.getInstance().getFrame();
         frame.setContentPane(this.root);
         frame.pack();
     }

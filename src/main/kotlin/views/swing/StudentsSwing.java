@@ -14,12 +14,15 @@ public class StudentsSwing implements StudentsView {
     private StudentsController controller;
 
     private JPanel root;
-    private JButton agendaButton;
-    private JButton groupsButton;
+    private JButton groupsBtn;
+    private JButton agendaBtn;
+    private JList studentsList;
+    private JButton newStudentBtn;
+    private JButton nextBtn;
 
     @Override
     public void start() {
-        JFrame frame = Frame.getIstance().getFrame();
+        JFrame frame = Frame.getInstance().getFrame();
         frame.setContentPane(this.root);
         frame.pack();
     }
@@ -27,7 +30,8 @@ public class StudentsSwing implements StudentsView {
     @Override
     public void setController(@NotNull StudentsController controller) {
         this.controller = controller;
-        agendaButton.addActionListener(actionEvent -> controller.startAgenda());
+        agendaBtn.addActionListener(actionEvent -> controller.startAgenda());
+        groupsBtn.addActionListener(actionEvent -> controller.startGroups());
     }
 
     @Override
@@ -75,12 +79,9 @@ public class StudentsSwing implements StudentsView {
         final JLabel label1 = new JLabel();
         label1.setText("Studneti");
         root.add(label1, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        agendaButton = new JButton();
-        agendaButton.setText("Agenda");
-        root.add(agendaButton, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        groupsButton = new JButton();
-        groupsButton.setText("Groups");
-        root.add(groupsButton, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        agendaBtn = new JButton();
+        agendaBtn.setText("Agenda");
+        root.add(agendaBtn, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
