@@ -51,6 +51,8 @@ class CourseDao(val daoFactory: DaoFactory) : Dao<Course, Pair<String, Int>> {
                 if (it != null) {
                     course.addGroup(it)
                     it.getMembers().forEach { course.addStudent(it) }
+                    if (it.work != null)
+                        course.addWorkTrack(it.work!!.workTrack)
                 }
             }
 
@@ -60,6 +62,14 @@ class CourseDao(val daoFactory: DaoFactory) : Dao<Course, Pair<String, Int>> {
             .forEach {
                 if (it != null)
                     course.addStudent(it)
+            }
+
+        val workTrackDao = daoFactory.workTrackDao
+        workTrackDao.filterBy(prepareWorkTrakStatament(courseName, courseYear))
+            .map { workTrackDao.read(it) }
+            .forEach {
+                if (it != null)
+                    course.addWorkTrack(it)
             }
 
         return course
@@ -128,6 +138,16 @@ class CourseDao(val daoFactory: DaoFactory) : Dao<Course, Pair<String, Int>> {
         val stm = Connection.getConnection().prepareStatement(sql)
         stm.setString(1, courseName)
         stm.setInt(2, courseYear)
+        return stm
+    }
+
+    private fun prepareWorkTrakStatament(courseName: String, courseYear: Int): PreparedStatement {
+        val sql = "select id from workTrack where course_name = ? and course_year = ? and id not in (select work_track from \"group\" where work_track not null and course_name = ? and course_year = ?)"
+        val stm = Connection.getConnection().prepareStatement(sql)
+        stm.setString(1, courseName)
+        stm.setInt(2, courseYear)
+        stm.setString(3, courseName)
+        stm.setInt(4, courseYear)
         return stm
     }
 }

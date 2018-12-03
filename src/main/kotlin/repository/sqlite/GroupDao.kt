@@ -2,13 +2,14 @@ package repository.sqlite
 
 import model.Group
 import model.Student
+import model.Work
 import repository.Dao
 import java.sql.PreparedStatement
 import java.sql.SQLException
 
 class GroupDao(val daoFactory: DaoFactory) : Dao<Group, String> {
     override fun create(obj: Group): Boolean {
-        val sql = "insert into \"group\" values (?, ?, ?)"
+        val sql = "insert into \"group\" values (?, ?, ?, ?)"
         val prepStat = Connection.getConnection().prepareStatement(sql)
         prepStat.setString(1, obj.name)
         if (obj.course == null) {
@@ -18,6 +19,10 @@ class GroupDao(val daoFactory: DaoFactory) : Dao<Group, String> {
             prepStat.setString(2, obj.course!!.name)
             prepStat.setInt(3, obj.course!!.year)
         }
+        if (obj.work == null || obj.work!!.workTrack.id == null)
+            prepStat.setNull(4, java.sql.Types.INTEGER)
+        else
+            prepStat.setInt(4, obj.work!!.workTrack.id!!)
 
         try {
             prepStat.execute()
@@ -29,7 +34,7 @@ class GroupDao(val daoFactory: DaoFactory) : Dao<Group, String> {
     }
 
     override fun read(id: String): Group? {
-        val sql = "select name from \"group\" where name=? limit 1"
+        val sql = "select name, work_track from \"group\" where name=? limit 1"
         val prepStat = Connection.getConnection().prepareStatement(sql)
         prepStat.setString(1, id)
 
@@ -39,6 +44,7 @@ class GroupDao(val daoFactory: DaoFactory) : Dao<Group, String> {
             return null
 
         val groupName = result.getString("name")
+        val workTrackID = result.getInt("work_track")
 
         val members = ArrayList<Student>()
         val studentDao = daoFactory.studentDao
@@ -49,11 +55,17 @@ class GroupDao(val daoFactory: DaoFactory) : Dao<Group, String> {
                     members.add(it)
             }
 
-        return Group(groupName, *members.toTypedArray())
+        val group = Group(groupName, *members.toTypedArray())
+
+        val workTrack = daoFactory.workTrackDao.read(workTrackID)
+        if (workTrack != null)
+            Work.createWork(group, workTrack)
+
+        return group
     }
 
     override fun update(obj: Group, oldID: String): Boolean {
-        val sql = "update \"group\" set name = ?, course_name = ?, course_year = ? where name = ?"
+        val sql = "update \"group\" set name = ?, course_name = ?, course_year = ?, work_track = ? where name = ?"
         val prepStat = Connection.getConnection().prepareStatement(sql)
         prepStat.setString(1, obj.name)
         if (obj.course == null) {
@@ -63,7 +75,11 @@ class GroupDao(val daoFactory: DaoFactory) : Dao<Group, String> {
             prepStat.setString(2, obj.course!!.name)
             prepStat.setInt(3, obj.course!!.year)
         }
-        prepStat.setString(4, oldID)
+        if (obj.work == null || obj.work!!.workTrack.id == null)
+            prepStat.setNull(4, java.sql.Types.INTEGER)
+        else
+            prepStat.setInt(4, obj.work!!.workTrack.id!!)
+        prepStat.setString(5, oldID)
 
         try {
             prepStat.execute()

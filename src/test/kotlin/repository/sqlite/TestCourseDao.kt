@@ -24,6 +24,7 @@ class TestCourseDao {
         assertEquals(2, course?.professorsSize())
         assertEquals(3, course?.groupsSize())
         assertEquals(8, course?.studentsSize())
+        assertEquals(2, course!!.workTracksSize())
     }
 
     @Test

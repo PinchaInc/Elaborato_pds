@@ -5,4 +5,5 @@ class DaoFactory : repository.DaoFactory {
     override val groupDao by lazy { GroupDao(this) }
     override val studentDao by lazy { StudentDao() }
     override val userDao by lazy { UserDao() }
+    override val workTrackDao by lazy { WorkTrackDao() }
 }
