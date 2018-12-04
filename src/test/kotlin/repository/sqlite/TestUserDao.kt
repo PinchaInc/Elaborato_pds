@@ -34,7 +34,7 @@ class TestUserDao {
     @Test
     fun testUpdate() {
         val tutor = Tutor("tutor1", "new surname1", "new email", 1001)
-        assertTrue(dao.update(tutor, 1001))
+        assertTrue(dao.update(tutor))
     }
 
     @Test

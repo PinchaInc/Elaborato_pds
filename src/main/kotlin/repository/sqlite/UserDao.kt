@@ -59,7 +59,7 @@ class UserDao : Dao<User, Int> {
                 )
     }
 
-    override fun update(obj: User, oldID: Int): Boolean {
+    override fun update(obj: User): Boolean {
         val sql =
             "update user set id = ?, name = ?, surname = ?, email = ?, course_name = ?, course_year = ? where id=?"
         val prepStat = Connection.getConnection().prepareStatement(sql)
@@ -74,7 +74,7 @@ class UserDao : Dao<User, Int> {
             prepStat.setString(5, obj.course!!.name)
             prepStat.setInt(6, obj.course!!.year)
         }
-        prepStat.setInt(7, oldID)
+        prepStat.setInt(7, obj.id)
 
         try {
             prepStat.execute()

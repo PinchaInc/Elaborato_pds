@@ -33,7 +33,7 @@ class TestMeetingDao {
     @Test
     fun testUpdate() {
         val meeting = MeetingHelper(Date(), Date(), 0, null, 1001, "group1")
-        assertTrue(dao.update(meeting, Pair("group1", 0)))
+        assertTrue(dao.update(meeting))
     }
 
     @Test

@@ -50,7 +50,7 @@ class TestCourseDao {
     @Test
     fun testUpdate() {
         val course = Course("test1", 1111)
-        assertTrue(dao.update(course, Pair("test1", 1001)))
+        assertTrue(dao.update(course))
     }
 
     @Test

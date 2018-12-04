@@ -45,7 +45,7 @@ class TestStudentDao {
     @Test
     fun testUpdate() {
         val student = Student("name1", "surname", 10)
-        assertTrue(dao.update(student, 10))
+        assertTrue(dao.update(student))
     }
 
     @Test

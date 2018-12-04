@@ -24,7 +24,7 @@ class TestWorkTrackDao {
     fun testUpdate() {
         val workTrack = WorkTrack("title test", "body test")
         workTrack.id = 1
-        assertTrue(dao.update(workTrack, 0))
+        assertTrue(dao.update(workTrack))
     }
 
     @Test

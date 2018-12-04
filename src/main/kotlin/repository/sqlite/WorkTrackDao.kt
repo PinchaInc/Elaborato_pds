@@ -47,7 +47,7 @@ class WorkTrackDao : Dao<WorkTrack, Int> {
         return workTrack
     }
 
-    override fun update(obj: WorkTrack, oldID: Int): Boolean {
+    override fun update(obj: WorkTrack): Boolean {
         val sql = "update workTrack set id = ?, title = ?, body = ?, course_name = ?, course_year = ? where id = ?"
         val prepStat = Connection.getConnection().prepareStatement(sql)
         if (obj.id == null)
@@ -62,7 +62,7 @@ class WorkTrackDao : Dao<WorkTrack, Int> {
             prepStat.setString(4, obj.course!!.name)
             prepStat.setInt(5, obj.course!!.year)
         }
-        prepStat.setInt(6, oldID)
+        prepStat.setInt(6, obj.id!!)
 
         try {
             prepStat.execute()

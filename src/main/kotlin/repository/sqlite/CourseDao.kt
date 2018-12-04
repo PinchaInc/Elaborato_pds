@@ -94,13 +94,13 @@ class CourseDao(val daoFactory: DaoFactory) : Dao<Course, Pair<String, Int>> {
         return course
     }
 
-    override fun update(obj: Course, oldID: Pair<String, Int>): Boolean {
+    override fun update(obj: Course): Boolean {
         val sql = "update course set name = ?, year = ? where name = ? and year = ?"
         val prepStat = Connection.getConnection().prepareStatement(sql)
         prepStat.setString(1, obj.name)
         prepStat.setInt(2, obj.year)
-        prepStat.setString(3, oldID.first)
-        prepStat.setInt(4, oldID.second)
+        prepStat.setString(3, obj.name)
+        prepStat.setInt(4, obj.year)
 
         try {
             prepStat.execute()

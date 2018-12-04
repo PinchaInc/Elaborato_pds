@@ -31,7 +31,7 @@ class TestReviewDao {
         val review = FinalReview("Title", "new body", 8)
         review.id = 0
         review.group = group
-        assertTrue(dao.update(review, Pair("group1", 0)))
+        assertTrue(dao.update(review))
     }
 
     @Test

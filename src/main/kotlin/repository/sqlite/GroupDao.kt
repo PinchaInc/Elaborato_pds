@@ -64,7 +64,7 @@ class GroupDao(val daoFactory: DaoFactory) : Dao<Group, String> {
         return group
     }
 
-    override fun update(obj: Group, oldID: String): Boolean {
+    override fun update(obj: Group): Boolean {
         val sql = "update \"group\" set name = ?, course_name = ?, course_year = ?, work_track = ? where name = ?"
         val prepStat = Connection.getConnection().prepareStatement(sql)
         prepStat.setString(1, obj.name)
@@ -79,7 +79,7 @@ class GroupDao(val daoFactory: DaoFactory) : Dao<Group, String> {
             prepStat.setNull(4, java.sql.Types.INTEGER)
         else
             prepStat.setInt(4, obj.work!!.workTrack.id!!)
-        prepStat.setString(5, oldID)
+        prepStat.setString(5, obj.name)
 
         try {
             prepStat.execute()

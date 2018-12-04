@@ -28,7 +28,7 @@ class TestGroupDao {
         val group = Group("group1")
         val course = Course("Functional Programming", 2019)
         group.course = course
-        assertTrue(dao.update(group, "group1"))
+        assertTrue(dao.update(group))
     }
 
     @Test

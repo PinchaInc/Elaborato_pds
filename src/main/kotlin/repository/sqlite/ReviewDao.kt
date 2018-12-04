@@ -56,7 +56,7 @@ class ReviewDao : Dao<Review, Pair<String, Int>> {
             )
     }
 
-    override fun update(obj: Review, oldID: Pair<String, Int>): Boolean {
+    override fun update(obj: Review): Boolean {
         val sql =
             "update review set \"group\" = ?, id = ?, title = ?, body = ?, type = ?, rating = ? where \"group\" = ? and id = ?"
         val prepStat = Connection.getConnection().prepareStatement(sql)
@@ -73,8 +73,8 @@ class ReviewDao : Dao<Review, Pair<String, Int>> {
             prepStat.setString(5, "standard")
             prepStat.setNull(6, java.sql.Types.INTEGER)
         }
-        prepStat.setString(7, oldID.first)
-        prepStat.setInt(8, oldID.second)
+        prepStat.setString(7, obj.group!!.name)
+        prepStat.setInt(8, obj.id!!)
 
         try {
             prepStat.execute()
