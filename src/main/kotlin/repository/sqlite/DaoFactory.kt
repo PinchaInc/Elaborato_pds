@@ -1,6 +1,7 @@
 package repository.sqlite
 
 class DaoFactory : repository.DaoFactory {
+    override val accountDao by lazy { AccountDao() }
     override val courseDao by lazy { CourseDao(this) }
     override val groupDao by lazy { GroupDao(this) }
     override val meetingDao by lazy { MeetingDao(this) }
