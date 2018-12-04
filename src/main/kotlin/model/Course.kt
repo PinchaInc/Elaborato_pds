@@ -36,6 +36,7 @@ class Course(val name: String, val year: Int) {
 
     fun addWorkTrack(workTrack: WorkTrack): Boolean {
         return if (workTracks.none { it.id == workTrack.id}) {
+            workTrack.id = generateId(workTrack)
             workTracks.add(workTrack)
             workTrack.course = this
             true
@@ -126,5 +127,12 @@ class Course(val name: String, val year: Int) {
         return if (groups.size > groupID)
             groups[groupID]
         else null
+    }
+
+    private fun generateId(w: WorkTrack): Int {
+        return if (w.id == null)
+            name.hashCode()+year+w.title.hashCode()+w.body.hashCode()
+        else
+            w.id!!
     }
 }
