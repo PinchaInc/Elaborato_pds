@@ -10,7 +10,7 @@ class TestAccount {
     @Test
     fun testPasswd() {
         val password = "password"
-        val account = Account("Username", password.hashCode())
+        val account = Account(1001, password.hashCode())
         val newPassword = "newPassword"
         account.passwd(password, newPassword, newPassword)
 
@@ -20,7 +20,7 @@ class TestAccount {
     @Test
     fun testPasswdErrorRepeat() {
         val password = "password"
-        val account = Account("Username", password.hashCode())
+        val account = Account(1001, password.hashCode())
         val newPassword = "newPassword"
         account.passwd(password, newPassword, "error")
 
@@ -30,7 +30,7 @@ class TestAccount {
     @Test
     fun testPasswdErrorOldPassword() {
         val password = "password"
-        val account = Account("Username", password.hashCode())
+        val account = Account(1001, password.hashCode())
         val newPassword = "newPassword"
         account.passwd("error", newPassword, newPassword)
 
@@ -40,7 +40,7 @@ class TestAccount {
     @Test
     fun testAuthenticate() {
         val password = "password"
-        val account = Account("Username", password.hashCode())
+        val account = Account(1001, password.hashCode())
         val auth = account.authenticate(password)
         assertTrue(auth)
     }
@@ -48,7 +48,7 @@ class TestAccount {
     @Test
     fun testAuthenticateError() {
         val password = "password"
-        val account = Account("Username", password.hashCode())
+        val account = Account(1001, password.hashCode())
         val auth = account.authenticate("error")
         assertFalse(auth)
     }

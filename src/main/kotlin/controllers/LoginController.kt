@@ -5,5 +5,5 @@ interface LoginController {
     fun startAgenda()
     fun startGroups()
     fun startStudents()
-    fun authenticate(username: String, password: String)
+    fun authenticate(username: Int, password: String)
 }

@@ -5,12 +5,12 @@ interface Model {
     fun getGroup(groupID: Int): Group?
     fun getWorkTrack(workTrackID: Int): WorkTrack?
     fun getMeeting(meetingID: Int): Meeting?
-    fun getAccount(username: String): Account?
+    fun getAccount(username: Int): Account?
     fun addStudent(student: Student): Boolean
     fun getStudent(studentID: Int): Student?
     fun addGroup(group: Group): Boolean
     fun checkGroupName(groupName: String): Boolean
-    fun loadUser(username: String): Boolean
+    fun loadUser(username: Int): Boolean
     fun getStudents(): Array<Student>
     fun getGroups(): Array<Group>
 }

@@ -1,6 +1,5 @@
 package model
 
-import java.util.Date
 
 sealed class User(
     val name: String,
@@ -12,8 +11,8 @@ sealed class User(
     var account: Account? = null
     var agenda: Agenda? = null
 
-    fun makeAccount(username: String, password: String) {
-        account = Account(username, password.hashCode())
+    fun makeAccount(password: String) {
+        account = Account(id, password.hashCode())
     }
 }
 

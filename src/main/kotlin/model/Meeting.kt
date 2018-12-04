@@ -11,6 +11,7 @@ data class Meeting(val group: Group, val start: Date, val end: Date) {
                 field = r
                 r?.meeting = this
                 r?.group = group
+                group.work?.addReview(r!!)
             }
         }
 

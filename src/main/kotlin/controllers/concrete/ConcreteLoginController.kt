@@ -25,7 +25,7 @@ class ConcreteLoginController(
 
     override fun startStudents() = application.startStudents()
 
-    override fun authenticate(username: String, password: String) {
+    override fun authenticate(username: Int, password: String) {
         val account = model.getAccount(username)
         if (account == null || !account.authenticate(password))
             view.showMessage("Error", MessageType.ERROR)

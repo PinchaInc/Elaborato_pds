@@ -20,7 +20,7 @@ open class TestControllersHelper {
             return ArrayList<Group>().toTypedArray()
         }
 
-        override fun loadUser(username: String): Boolean {
+        override fun loadUser(username: Int): Boolean {
             return false
         }
 
@@ -40,7 +40,7 @@ open class TestControllersHelper {
             return null
         }
 
-        override fun getAccount(username: String): Account? {
+        override fun getAccount(username: Int): Account? {
             return null
         }
 
@@ -66,7 +66,7 @@ open class TestControllersHelper {
             return ArrayList<Group>().toTypedArray()
         }
 
-        override fun loadUser(username: String): Boolean {
+        override fun loadUser(username: Int): Boolean {
             return true
         }
 
@@ -89,8 +89,8 @@ open class TestControllersHelper {
             return meeting
         }
 
-        override fun getAccount(username: String): Account? {
-            return Account("username", "password".hashCode())
+        override fun getAccount(username: Int): Account? {
+            return Account(1001, "password".hashCode())
         }
 
         override fun addStudent(student: Student): Boolean {

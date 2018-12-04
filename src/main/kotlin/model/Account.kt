@@ -1,6 +1,6 @@
 package model
 
-data class Account(var username: String, var password: Int) {
+data class Account(var username: Int, var password: Int) {
 
     fun passwd(oldPassword: String, newPassword: String, repeatPassword: String) {
         if (oldPassword.hashCode() == password && newPassword == repeatPassword)

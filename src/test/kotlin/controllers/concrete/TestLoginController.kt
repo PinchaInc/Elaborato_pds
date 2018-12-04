@@ -36,18 +36,18 @@ class TestLoginController : TestControllersHelper() {
     //@Test non riesce ad avviare la schermata perchè non implementata
     fun testAuthenticate() {
         val controller = ConcreteLoginController(viewOk, model, app)
-        controller.authenticate("username", "password")
+        controller.authenticate(1001, "password")
     }
 
     @Test
     fun testAuthenticateErrorWrongUsername() {
         val controller = ConcreteLoginController(viewError, modelError, app)
-        controller.authenticate("username", "password")
+        controller.authenticate(1001, "password")
     }
 
     @Test
     fun testAuthenticateErrorWrongPassword() {
         val controller = ConcreteLoginController(viewError, model, app)
-        controller.authenticate("username", "error")
+        controller.authenticate(1001, "error")
     }
 }
