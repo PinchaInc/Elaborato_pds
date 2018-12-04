@@ -15,7 +15,7 @@ class CourseDao(val daoFactory: DaoFactory) : Dao<Course, Pair<String, Int>> {
         try {
             prepStat.execute()
         } catch (e: SQLException) {
-            e.stackTrace
+            e.printStackTrace()
             return false
         }
         return true
@@ -105,7 +105,7 @@ class CourseDao(val daoFactory: DaoFactory) : Dao<Course, Pair<String, Int>> {
         try {
             prepStat.execute()
         } catch (e: SQLException) {
-            e.stackTrace
+            e.printStackTrace()
             return false
         }
         return true
@@ -120,7 +120,7 @@ class CourseDao(val daoFactory: DaoFactory) : Dao<Course, Pair<String, Int>> {
         try {
             prepStat.execute()
         } catch (e: SQLException) {
-            e.stackTrace
+            e.printStackTrace()
             return false
         }
         return true

@@ -15,7 +15,7 @@ data class MeetingHelper(
 ) {
 
     fun makeMeeting(group: Group): Meeting {
-        val meeting = model.Meeting(group, start, end)
+        val meeting = Meeting(group, start, end)
         meeting.review = review
         meeting.id = id
 

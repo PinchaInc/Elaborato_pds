@@ -27,7 +27,7 @@ class StudentDao : Dao<Student, Int> {
         try {
             prepStat.execute()
         } catch (e: SQLException) {
-            e.stackTrace
+            e.printStackTrace()
             return false
         }
         return true
@@ -73,7 +73,7 @@ class StudentDao : Dao<Student, Int> {
         try {
             prepStat.execute()
         } catch (e: SQLException) {
-            e.stackTrace
+            e.printStackTrace()
             return false
         }
         return true
@@ -87,7 +87,7 @@ class StudentDao : Dao<Student, Int> {
         try {
             prepStat.execute()
         } catch (e: SQLException) {
-            e.stackTrace
+            e.printStackTrace()
             return false
         }
         return true
