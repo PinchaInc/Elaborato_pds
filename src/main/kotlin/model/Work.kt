@@ -1,7 +1,7 @@
 package model
 
 class Work(val group: Group, val workTrack: WorkTrack) {
-    val reviews = ArrayList<Review>()
+    private val reviews = ArrayList<Review>()
 
     fun addReview(review: Review){
         if (!reviews.contains(review)) {
@@ -16,6 +16,10 @@ class Work(val group: Group, val workTrack: WorkTrack) {
             review.work = null
         }
     }
+
+    fun reviewsSize() = reviews.size
+
+    fun reviews() = reviews.toTypedArray()
 
     companion object {
         fun createWork(group: Group, workTrack: WorkTrack): Work? {

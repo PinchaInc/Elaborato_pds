@@ -35,8 +35,8 @@ class Course(val name: String, val year: Int) {
     }
 
     fun addWorkTrack(workTrack: WorkTrack): Boolean {
+        workTrack.id = generateId(workTrack)
         return if (workTracks.none { it.id == workTrack.id}) {
-            workTrack.id = generateId(workTrack)
             workTracks.add(workTrack)
             workTrack.course = this
             true

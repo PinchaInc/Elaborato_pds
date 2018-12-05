@@ -19,11 +19,12 @@ class Group(var name: String, vararg students: Student) {
     }
 
     fun addMeeting(meeting: Meeting): Boolean {
-        if (!meetings.contains(meeting) && meetingCount < 4) {
+        return if (meetings.none { it.id == meeting.id && it.group.name == meeting.group.name }
+            && meetingCount < 4) {
             meetings.add(meeting)
-            return true
+            true
         } else
-            return false
+            false
     }
 
     fun removeMeeting(meeting: Meeting) {

@@ -14,12 +14,12 @@ class TestWork {
         val review = Review("title", "body")
         val work = Work(group, workTrack)
         work.addReview(review)
-        assertEquals(1, work.reviews.size)
+        assertEquals(1, work.reviewsSize())
         assertEquals(work, review.work)
         work.addReview(review)
-        assertEquals(1, work.reviews.size)
+        assertEquals(1, work.reviewsSize())
         work.removeReview(review)
-        assertEquals(0, work.reviews.size)
+        assertEquals(0, work.reviewsSize())
         assertNull(review.work)
     }
 
