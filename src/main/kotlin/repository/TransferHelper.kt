@@ -16,7 +16,8 @@ data class MeetingHelper(
 
     fun makeMeeting(group: Group): Meeting {
         val meeting = Meeting(group, start, end)
-        meeting.review = review
+        if (review != null)
+            meeting.review = review
         meeting.id = id
 
         return meeting

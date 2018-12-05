@@ -17,9 +17,10 @@ abstract class Repository {
 
     fun readCourse(username: Int): Course? {
         val courseIds = factory.courseDao.filterBy(prepareCourseStatament(username))
-        if (courseIds.isEmpty())
-            return null
-        return factory.courseDao.read(courseIds.first())
+        return if (courseIds.isEmpty())
+            null
+        else
+            factory.courseDao.read(courseIds.first())
     }
 
     fun saveAccount(account: Account) = factory.accountDao.create(account)
@@ -28,9 +29,13 @@ abstract class Repository {
 
     fun saveGroup(group: Group) = factory.groupDao.create(group)
 
-    fun saveMeeting(meeting: Meeting) = factory.meetingDao.create(
-        MeetingHelper.makeMeetingHelper(meeting)!!
-    )
+    fun saveMeeting(meeting: Meeting): Boolean {
+        val meetingHelper = MeetingHelper.makeMeetingHelper(meeting)
+        return if (meetingHelper == null)
+            false
+        else
+            factory.meetingDao.create(meetingHelper)
+    }
 
     fun saveReview(review: Review) = factory.reviewDao.create(review)
 
@@ -46,9 +51,13 @@ abstract class Repository {
 
     fun updateGroup(group: Group) = factory.groupDao.update(group)
 
-    fun updateMeeting(meeting: Meeting) = factory.meetingDao.update(
-        MeetingHelper.makeMeetingHelper(meeting)!!
-    )
+    fun updateMeeting(meeting: Meeting): Boolean {
+        val meetingHelper = MeetingHelper.makeMeetingHelper(meeting)
+        return if (meetingHelper == null)
+            false
+        else
+            factory.meetingDao.update(meetingHelper)
+    }
 
     fun updateReview(review: Review) = factory.reviewDao.update(review)
 
@@ -66,19 +75,34 @@ abstract class Repository {
 
     fun deleteGroup(group: Group) = factory.groupDao.delete(group.name)
 
-    fun deleteMeeting(meeting: Meeting) = factory.meetingDao.delete(
-        Pair(meeting.group.name, meeting.id!!)
-    )
+    fun deleteMeeting(meeting: Meeting): Boolean {
+        return if (meeting.id == null)
+            false
+        else
+            factory.meetingDao.delete(
+                Pair(meeting.group.name, meeting.id!!)
+            )
+    }
 
-    fun deleteReview(review: Review) = factory.reviewDao.delete(
-        Pair(review.group!!.name, review.id!!)
-    )
+    fun deleteReview(review: Review): Boolean {
+        return if (review.group == null || review.id == null)
+            false
+        else
+            factory.reviewDao.delete(
+                Pair(review.group!!.name, review.id!!)
+            )
+    }
 
     fun deleteStudent(student: Student) = factory.studentDao.delete(student.id)
 
     fun deleteUser(user: User) = factory.userDao.delete(user.id)
 
-    fun deleteWorkTrack(workTrack: WorkTrack) = factory.workTrackDao.delete(workTrack.id!!)
+    fun deleteWorkTrack(workTrack: WorkTrack): Boolean {
+        return if (workTrack.id == null)
+            false
+        else
+            factory.workTrackDao.delete(workTrack.id!!)
+    }
 
     abstract fun makeDaoFactory(): DaoFactory
 

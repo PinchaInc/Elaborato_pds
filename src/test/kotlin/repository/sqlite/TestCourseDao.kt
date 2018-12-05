@@ -41,10 +41,12 @@ class TestCourseDao {
         assertNotNull(group1)
         assertEquals(3, group1!!.membersSize())
         assertEquals(2, group1.meetingsSize())
+        assertEquals(1, group1.work!!.reviewsSize())
         val group2 = course.getGroups().find { it.name == "group2" }
         assertNotNull(group2)
         assertEquals(1, group2!!.membersSize())
         assertEquals(2, group2.meetingsSize())
+        assertEquals(2, group2.work!!.reviewsSize())
     }
 
     @Test
