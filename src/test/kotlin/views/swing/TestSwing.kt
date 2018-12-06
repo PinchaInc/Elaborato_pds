@@ -18,7 +18,13 @@ fun main(args: Array<String>) {
         override fun makeModel(): Model {
             return object : Model {
                 override fun getStudents(): Array<Student> {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    val student = Student("name2", "surname", 2)
+                    Group("group", student)
+                    return arrayOf(
+                        Student("name1", "surname", 1),
+                        student,
+                        Student("name3", "surname", 3)
+                    )
                 }
 
                 override fun getGroups(): Array<Group> {

@@ -11,7 +11,7 @@ class SwingFactory: ViewsFactory {
 
     override fun createGroupView(): GroupsView = GroupsSwing()
 
-    override fun createLoginView(): LoginView = LoginSwing()
+    override fun createLoginView(): LoginView = Login()
 
-    override fun createStudentsView(): StudentsView = StudentsSwing()
+    override fun createStudentsView(): StudentsView = Students()
 }
