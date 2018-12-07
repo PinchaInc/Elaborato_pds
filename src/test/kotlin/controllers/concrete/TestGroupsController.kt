@@ -7,10 +7,15 @@ import model.Model
 import org.junit.Test
 import views.GroupsView
 import java.util.Date
+import java.util.Observable
 
 class TestGroupsController : TestControllersHelper() {
 
     val viewOk = object : GroupsView {
+        override fun update(p0: Observable?, p1: Any?) {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
         override fun start() {}
 
         override fun setController(controller: GroupsController) {}
@@ -23,6 +28,10 @@ class TestGroupsController : TestControllersHelper() {
     }
 
     val viewError = object : GroupsView {
+        override fun update(p0: Observable?, p1: Any?) {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
         override fun start() {}
 
         override fun setController(controller: GroupsController) {}

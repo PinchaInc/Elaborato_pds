@@ -9,10 +9,15 @@ import model.Model
 import org.junit.Test
 import views.AgendaView
 import java.util.Date
+import java.util.Observable
 
 class TestAgendaController : TestControllersHelper() {
 
     val viewOk = object : AgendaView {
+        override fun update(p0: Observable?, p1: Any?) {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
         override fun start() {}
 
         override fun setController(controller: AgendaController) {}
@@ -25,6 +30,10 @@ class TestAgendaController : TestControllersHelper() {
     }
 
     val viewError = object : AgendaView {
+        override fun update(p0: Observable?, p1: Any?) {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
         override fun start() {}
 
         override fun setController(controller: AgendaController) {}

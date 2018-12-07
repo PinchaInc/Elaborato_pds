@@ -16,7 +16,7 @@ import javax.swing.JTable
 import javax.swing.JTextField
 import javax.swing.table.DefaultTableModel
 
-class Students : StudentsView {
+class StudentsView : StudentsView {
     private lateinit var model: Model
     private val root = JPanel()
     private val groups = JButton("Groups")

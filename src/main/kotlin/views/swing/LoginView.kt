@@ -12,7 +12,7 @@ import javax.swing.JPanel
 import javax.swing.JPasswordField
 import javax.swing.JTextField
 
-class Login : LoginView {
+class LoginView : LoginView {
 
     private lateinit var model: Model
     private val root = JPanel()
