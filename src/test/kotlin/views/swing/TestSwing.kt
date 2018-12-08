@@ -35,7 +35,7 @@ fun main(args: Array<String>) {
                 }
 
                 override fun getGroups(): Array<Group> {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    return course.getGroups()
                 }
 
                 override fun getGroup(groupID: Int): Group? {
@@ -66,11 +66,16 @@ fun main(args: Array<String>) {
                 }
 
                 override fun getStudent(studentID: Int): Student? {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    return course.getStudent(studentID)
                 }
 
                 override fun addGroup(group: Group): Boolean {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    if (course.addGroup(group)) {
+                        setChanged()
+                        notifyObservers(group)
+                        return true
+                    }
+                    return false
                 }
 
                 override fun checkGroupName(groupName: String): Boolean {

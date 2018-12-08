@@ -2,6 +2,7 @@ package views.swing
 
 import Util.MessageType
 import controllers.StudentsController
+import model.Group
 import model.Model
 import model.Student
 import views.StudentsView
@@ -27,6 +28,8 @@ class StudentsView : StudentsView {
     private val matField = JTextField()
     private val nameField = JTextField()
     private val surnameField = JTextField()
+    private val addGroup = JButton("Add Group")
+    private val groupNameField = JTextField()
 
     init {
         root {
@@ -49,24 +52,41 @@ class StudentsView : StudentsView {
             bodyJPanel {
                 val controllJPanel = JPanel()
                 controllJPanel {
-                    val matJPanle = JPanel()
-                    matJPanle {
-                        layout = GridLayout(1, 2)
-                        add(JLabel("mat."))
-                        add(matField)
+
+                    val addStudentJPanel = JPanel()
+                    addStudentJPanel {
+                        val matJPanle = JPanel()
+                        matJPanle {
+                            layout = GridLayout(1, 2)
+                            add(JLabel("mat."))
+                            add(matField)
+                        }
+
+                        addStudent {
+                            preferredSize = Dimension(200, 10)
+                        }
+
+                        layout = GridLayout(6, 1)
+                        add(matJPanle)
+                        add(JLabel("Name"))
+                        add(nameField)
+                        add(JLabel("surname"))
+                        add(surnameField)
+                        add(addStudent)
                     }
 
-                    addStudent {
-                        preferredSize = Dimension(200, 10)
+                    val addGroupJPanel = JPanel()
+                    addGroupJPanel {
+
+                        layout = GridLayout(3, 1)
+                        add(JLabel("Group name"))
+                        add(groupNameField)
+                        add(addGroup)
                     }
 
-                    layout = GridLayout(6, 1)
-                    add(matJPanle)
-                    add(JLabel("Name"))
-                    add(nameField)
-                    add(JLabel("surname"))
-                    add(surnameField)
-                    add(addStudent)
+                    layout = GridLayout(1, 2)
+                    add(addStudentJPanel)
+                    add(addGroupJPanel)
                 }
 
                 layout = GridLayout(1, 2)
@@ -101,6 +121,13 @@ class StudentsView : StudentsView {
                 matField.text = ""
             }
         }
+        addGroup.addActionListener {
+            val students = studentsJTable.selectedRows
+            if (students.isEmpty() || groupNameField.text.isBlank())
+                showMessage("error", MessageType.ERROR)
+            else
+                controller.addGroup(groupNameField.text, *students)
+        }
     }
 
     override fun setModel(model: Model) {
@@ -111,12 +138,16 @@ class StudentsView : StudentsView {
     }
 
     override fun showMessage(message: String, type: MessageType) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Frame.getInstance().showMessage(message, type)
     }
 
     override fun update(p0: Observable?, p1: Any?) {
         when (p1) {
             is Student -> populateTable(p1)
+            is Group -> {
+                tableModel.rowCount = 0
+                populateTable(*(p0 as Model).getStudents())
+            }
         }
     }
 

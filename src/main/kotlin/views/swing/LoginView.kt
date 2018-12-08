@@ -80,5 +80,6 @@ class LoginView : LoginView {
     }
 
     override fun showMessage(message: String, type: MessageType) {
+        Frame.getInstance().showMessage(message, type)
     }
 }

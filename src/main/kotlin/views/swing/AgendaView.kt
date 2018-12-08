@@ -52,7 +52,7 @@ class AgendaView: AgendaView {
     }
 
     override fun showMessage(message: String, type: MessageType) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Frame.getInstance().showMessage(message, type)
     }
 
     override fun update(p0: Observable?, p1: Any?) {
