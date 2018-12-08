@@ -1,5 +1,7 @@
 package views.swing;
 
+import Util.MessageType;
+
 import javax.swing.*;
 
 class Frame {
@@ -23,5 +25,12 @@ class Frame {
 
     JFrame getFrame() {
         return frame;
+    }
+
+    void showMessage(String message, MessageType type) {
+        if (type == MessageType.ERROR)
+            new JOptionPane(message, JOptionPane.ERROR_MESSAGE).createDialog(message).show();
+        else
+            JOptionPane.showMessageDialog(frame, message);
     }
 }
