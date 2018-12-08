@@ -27,7 +27,11 @@ abstract class Repository {
 
     fun saveCourse(course: Course) = factory.courseDao.create(course)
 
-    fun saveGroup(group: Group) = factory.groupDao.create(group)
+    fun saveGroup(group: Group): Boolean {
+        if (!factory.groupDao.create(group))
+            return false
+        return group.getMembers().map { factory.studentDao.update(it) }.none { !it }
+    }
 
     fun saveMeeting(meeting: Meeting): Boolean {
         val meetingHelper = MeetingHelper.makeMeetingHelper(meeting)

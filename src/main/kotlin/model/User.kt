@@ -14,6 +14,13 @@ sealed class User(
     fun makeAccount(password: String) {
         account = Account(id, password.hashCode())
     }
+
+    fun getMeeting(meetingID: Int): Meeting? {
+        return if (agenda == null)
+            null
+        else
+            agenda!!.getMeeting(meetingID)
+    }
 }
 
 class Tutor(

@@ -17,6 +17,7 @@ dependencies {
 
 test {
     exclude("**/sqlite/*")
+    exclude("**/model/model/*")
 }
 
 compileKotlin {
