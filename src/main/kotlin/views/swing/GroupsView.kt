@@ -184,7 +184,7 @@ class GroupsView: views.GroupsView {
             if (selectedGroups.size != 1 || dateFiled.text.isBlank())
                 showMessage("error", MessageType.ERROR)
             else {
-                val simpleDateFormat = SimpleDateFormat("dd-mm-yyyy")
+                val simpleDateFormat = SimpleDateFormat("dd-MM-yyyy")
                 try {
                     val date = simpleDateFormat.parse(dateFiled.text)
                     controller.addMeeting(selectedGroups[0], date, date)
