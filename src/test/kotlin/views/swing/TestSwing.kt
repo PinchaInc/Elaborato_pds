@@ -19,6 +19,7 @@ fun main(args: Array<String>) {
 
         override fun makeModel(): Model {
             return object : Model, Observable() {
+
                 val course: Course
 
                 init {
@@ -29,7 +30,11 @@ fun main(args: Array<String>) {
                     val group = Group("group", student)
                     course.addStudent(student)
                     course.addGroup(group)
+                    course.addWorkTrack(WorkTrack("title", "body"))
+                    course.addWorkTrack(WorkTrack("title1", "body"))
+                    course.addWorkTrack(WorkTrack("title2", "body"))
                 }
+
                 override fun getStudents(): Array<Student> {
                     return course.getStudents()
                 }
@@ -38,8 +43,20 @@ fun main(args: Array<String>) {
                     return course.getGroups()
                 }
 
+                override fun getWorkTracks(): Array<WorkTrack> {
+                    return course.getWorkTracks()
+                }
+
+                override fun assignWorkTrack(groupID: Int, workTrackID: Int): Boolean {
+                    if (!course.assignWorkTrack(groupID, workTrackID))
+                        return false
+                    setChanged()
+                    notifyObservers(course.getGroups())
+                    return true
+                }
+
                 override fun getGroup(groupID: Int): Group? {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    return course.getGroup(groupID)
                 }
 
                 override fun getWorkTrack(workTrackID: Int): WorkTrack? {
@@ -83,6 +100,14 @@ fun main(args: Array<String>) {
                 }
 
                 override fun loadUser(username: Int): Boolean {
+                    return true
+                }
+
+                override fun addWorkTrack(workTrack: WorkTrack): Boolean {
+                    if (!course.addWorkTrack(workTrack))
+                        return true
+                    setChanged()
+                    notifyObservers(workTrack)
                     return true
                 }
             }
