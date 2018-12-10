@@ -13,4 +13,7 @@ interface Model {
     fun loadUser(username: Int): Boolean
     fun getStudents(): Array<Student>
     fun getGroups(): Array<Group>
+    fun getWorkTracks(): Array<WorkTrack>
+    fun addWorkTrack(workTrack: WorkTrack): Boolean
+    fun assignWorkTrack(groupID: Int, workTrackID: Int): Boolean
 }

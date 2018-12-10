@@ -129,6 +129,15 @@ class Course(val name: String, val year: Int) {
         else null
     }
 
+    fun assignWorkTrack(groupID: Int, workTrackID: Int): Boolean {
+        val group = getGroup(groupID)
+        val workTrack = getWorkTrack(workTrackID)
+        if (group == null || workTrack == null)
+            return false
+
+        return Work.createWork(group, workTrack) != null
+    }
+
     private fun generateId(w: WorkTrack): Int {
         return if (w.id == null)
             name.hashCode()+year+w.title.hashCode()+w.body.hashCode()

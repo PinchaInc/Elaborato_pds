@@ -61,5 +61,11 @@ abstract class ConcreteModel: Model {
 
     override fun getGroups(): Array<Group> = course.getGroups()
 
+    override fun getWorkTracks(): Array<WorkTrack> = course.getWorkTracks()
+
+    override fun addWorkTrack(workTrack: WorkTrack): Boolean = course.addWorkTrack(workTrack)
+
+    override fun assignWorkTrack(groupID: Int, workTrackID: Int): Boolean = course.assignWorkTrack(groupID, workTrackID)
+
     abstract fun makeRepository(): Repository
 }
