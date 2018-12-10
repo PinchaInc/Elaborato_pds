@@ -6,6 +6,7 @@ import controllers.GroupsController
 import model.Meeting
 import model.Model
 import model.Work
+import model.WorkTrack
 import views.GroupsView
 import java.util.Date
 
@@ -38,10 +39,17 @@ class ConcreteGroupsController(
 
     override fun addMeeting(groupID: Int, stratDate: Date, endDate: Date) {
         val group = model.getGroup(groupID)
-        if (group != null) {
+        if (group?.work != null) {
             Meeting(group, stratDate, endDate)
             view.showMessage("OK")
         } else
+            view.showMessage("error", MessageType.ERROR)
+    }
+
+    override fun addWorkTrack(title: String, body: String) {
+        if (model.addWorkTrack(WorkTrack(title, body)))
+            view.showMessage("ok")
+        else
             view.showMessage("error", MessageType.ERROR)
     }
 }

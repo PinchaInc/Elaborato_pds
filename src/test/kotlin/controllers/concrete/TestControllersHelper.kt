@@ -6,12 +6,25 @@ import model.Group
 import model.Meeting
 import model.Model
 import model.Student
+import model.Work
 import model.WorkTrack
 import views.ViewsFactory
 import java.util.Date
 
 open class TestControllersHelper {
     val modelError = object : Model {
+        override fun assignWorkTrack(groupID: Int, workTrackID: Int): Boolean {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+        override fun addWorkTrack(workTrack: WorkTrack): Boolean {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+        override fun getWorkTracks(): Array<WorkTrack> {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
         override fun getStudents(): Array<Student> {
             return ArrayList<Student>().toTypedArray()
         }
@@ -58,6 +71,26 @@ open class TestControllersHelper {
     }
 
     val model = object : Model {
+        val group = Group("name")
+        val meeting: Meeting
+
+        init {
+            Work.createWork(group, WorkTrack("title", "body"))
+            meeting = Meeting(group, Date(), Date())
+        }
+
+        override fun assignWorkTrack(groupID: Int, workTrackID: Int): Boolean {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+        override fun addWorkTrack(workTrack: WorkTrack): Boolean {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+        override fun getWorkTracks(): Array<WorkTrack> {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
         override fun getStudents(): Array<Student> {
             return ArrayList<Student>().toTypedArray()
         }
@@ -74,8 +107,7 @@ open class TestControllersHelper {
             return true
         }
 
-        val group = Group("name")
-        val meeting = Meeting(group, Date(), Date())
+
 
         override fun getGroup(groupID: Int): Group? {
             return group

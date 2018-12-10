@@ -8,4 +8,5 @@ interface GroupsController {
     fun startAgenda()
     fun assignWork(groupID: Int, workTrackID: Int)
     fun addMeeting(groupID: Int, stratDate: Date, endDate: Date)
+    fun addWorkTrack(title: String, body: String)
 }
