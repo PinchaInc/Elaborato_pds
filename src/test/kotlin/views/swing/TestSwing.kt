@@ -2,13 +2,18 @@ package views.swing
 
 import controllers.Application
 import model.Account
+import model.Agenda
 import model.Course
 import model.Group
 import model.Meeting
 import model.Model
 import model.Student
+import model.Tutor
+import model.User
+import model.Work
 import model.WorkTrack
 import views.ViewsFactory
+import java.util.Date
 import java.util.Observable
 
 fun main(args: Array<String>) {
@@ -19,8 +24,8 @@ fun main(args: Array<String>) {
 
         override fun makeModel(): Model {
             return object : Model, Observable() {
-
                 val course: Course
+                val user: User
 
                 init {
                     course = Course("course1", 2018)
@@ -30,9 +35,16 @@ fun main(args: Array<String>) {
                     val group = Group("group", student)
                     course.addStudent(student)
                     course.addGroup(group)
-                    course.addWorkTrack(WorkTrack("title", "body"))
+                    val wt = WorkTrack("title", "body")
+                    course.addWorkTrack(wt)
                     course.addWorkTrack(WorkTrack("title1", "body"))
                     course.addWorkTrack(WorkTrack("title2", "body"))
+                    Work.createWork(group, wt)
+                    user = Tutor("name", "surname", "email", 1223)
+                    course.addTeacher(user)
+                    val meeting = Meeting(group, Date(), Date())
+                    val agenda = Agenda(user)
+                    agenda.addMeeting(meeting)
                 }
 
                 override fun getStudents(): Array<Student> {
@@ -108,6 +120,21 @@ fun main(args: Array<String>) {
                         return true
                     setChanged()
                     notifyObservers(workTrack)
+                    return true
+                }
+
+                override fun getMeetings(): Array<Meeting> {
+                    return user.getMeetings()
+                }
+
+                override fun addMeeting(meeting: Meeting): Boolean {
+                    val agenda = if (user.agenda == null)
+                        Agenda(user)
+                    else
+                        user.agenda!!
+                    agenda.addMeeting(meeting)
+                    setChanged()
+                    notifyObservers(meeting)
                     return true
                 }
             }
