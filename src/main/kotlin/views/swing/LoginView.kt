@@ -6,6 +6,7 @@ import model.Model
 import views.LoginView
 import java.awt.Dimension
 import java.awt.GridLayout
+import java.lang.Exception
 import javax.swing.JButton
 import javax.swing.JLabel
 import javax.swing.JPanel
@@ -70,8 +71,13 @@ class LoginView : LoginView {
             username.text = ""
             password.text = ""
         }
+
         login.addActionListener {
-            controller.authenticate(username.text.toInt(), password.text)
+            try {
+                controller.authenticate(username.text.toInt(), password.text)
+            } catch (e: Exception) {
+                showMessage("error", MessageType.ERROR)
+            }
         }
     }
 

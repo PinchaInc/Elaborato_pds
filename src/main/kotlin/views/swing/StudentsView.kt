@@ -107,7 +107,7 @@ class StudentsView : StudentsView {
                     val columNameJPanel = JPanel()
                     columNameJPanel {
 
-                        layout = GridLayout(1,4)
+                        layout = GridLayout(1, 4)
                         add(JLabel("Mat"))
                         add(JLabel("Name"))
                         add(JLabel("Surname"))
@@ -138,31 +138,34 @@ class StudentsView : StudentsView {
 
     override fun setController(controller: StudentsController) {
         groups.addActionListener { controller.startGroups() }
+
         agenda.addActionListener { controller.startAgenda() }
+
         addStudent.addActionListener {
             try {
-                val mat = matField.text.toInt()
-                val name = nameField.text
-                val surname = surnameField.text
-
-                if (!name.isBlank() && !surname.isBlank())
-                    controller.addStudent(name, surname, mat)
+                controller.addStudent(
+                    nameField.text,
+                    surnameField.text,
+                    matField.text.toInt()
+                )
             } catch (e: NumberFormatException) {
                 matField.text = ""
+                showMessage("Matricola non valida", MessageType.ERROR)
             }
         }
+
         addGroup.addActionListener {
-            val students = studentsJTable.selectedRows
-            if (students.isEmpty() || groupNameField.text.isBlank())
-                showMessage("error", MessageType.ERROR)
-            else
-                controller.addGroup(groupNameField.text, *students)
+            controller.addGroup(
+                groupNameField.text,
+                *studentsJTable.selectedRows
+            )
         }
     }
 
     override fun setModel(model: Model) {
         this.model = model
         arrayOf("mat", "name", "surname", "group").forEach { tableModel.addColumn(it) }
+
         populateTable(*model.getStudents())
         (model as Observable).addObserver(this)
     }
@@ -174,6 +177,7 @@ class StudentsView : StudentsView {
     override fun update(p0: Observable?, p1: Any?) {
         when (p1) {
             is Student -> populateTable(p1)
+
             is Group -> {
                 tableModel.rowCount = 0
                 populateTable(*(p0 as Model).getStudents())

@@ -19,7 +19,7 @@ import javax.swing.JTable
 import javax.swing.JTextField
 import javax.swing.table.DefaultTableModel
 
-class GroupsView: views.GroupsView {
+class GroupsView : views.GroupsView {
     private lateinit var model: Model
     private val root = JPanel()
     private val agenda = JButton("Agenda")
@@ -34,7 +34,6 @@ class GroupsView: views.GroupsView {
     private val setTrack = JButton("Set Work Track")
     private val dateFiled = JTextField()
     private val addMeeting = JButton("Add Meeting")
-
 
     init {
         root {
@@ -71,8 +70,7 @@ class GroupsView: views.GroupsView {
                     val columNameJPanel = JPanel()
                     columNameJPanel {
 
-                        layout = GridLayout(1, 3)
-                        add(JLabel("ID"))
+                        layout = GridLayout(1, 2)
                         add(JLabel("Title"))
                         add(JLabel("Body"))
                     }
@@ -121,7 +119,7 @@ class GroupsView: views.GroupsView {
                             dateJPanel {
 
                                 layout = BorderLayout()
-                                add(JLabel("Date(dd-mm-yyyy"), BorderLayout.NORTH)
+                                add(JLabel("Date(dd-mm-yyyy)"), BorderLayout.NORTH)
                                 add(dateFiled, BorderLayout.CENTER)
                             }
 
@@ -161,24 +159,22 @@ class GroupsView: views.GroupsView {
 
     override fun setController(controller: GroupsController) {
         agenda.addActionListener { controller.startAgenda() }
+
         students.addActionListener { controller.startStudents() }
+
         addTrack.addActionListener {
-            if (titleField.text.isBlank() || bodyField.text.isBlank())
-                showMessage("error", MessageType.ERROR)
-            else
-                controller.addWorkTrack(
-                    titleField.text,
-                    bodyField.text
-                )
+            controller.addWorkTrack(titleField.text, bodyField.text)
         }
+
         setTrack.addActionListener {
             val selectedGroups = groupsJTable.selectedRows
             val selectedTracks = tracksJTable.selectedRows
             if (selectedGroups.size != 1 || selectedTracks.size != 1)
                 showMessage("error", MessageType.ERROR)
             else
-                model.assignWorkTrack(selectedGroups[0], selectedTracks[0])
+                controller.assignWork(selectedGroups[0], selectedTracks[0])
         }
+
         addMeeting.addActionListener {
             val selectedGroups = groupsJTable.selectedRows
             if (selectedGroups.size != 1 || dateFiled.text.isBlank())
@@ -198,8 +194,10 @@ class GroupsView: views.GroupsView {
     override fun setModel(model: Model) {
         this.model = model
         (model as Observable).addObserver(this)
+
         arrayOf("name", "workTrack").forEach { tableModelGroups.addColumn(it) }
         populateGroupsTable(*model.getGroups())
+
         arrayOf("Title", "Body").forEach { tableModelTracks.addColumn(it) }
         populateTracksTable(*model.getWorkTracks())
     }
@@ -211,7 +209,9 @@ class GroupsView: views.GroupsView {
     override fun update(p0: Observable?, p1: Any?) {
         when (p1) {
             is Group -> populateGroupsTable(p1)
+
             is WorkTrack -> populateTracksTable(p1)
+
             is Array<*> -> {
                 tableModelGroups.rowCount = 0
                 populateGroupsTable(*(p0 as Model).getGroups())
