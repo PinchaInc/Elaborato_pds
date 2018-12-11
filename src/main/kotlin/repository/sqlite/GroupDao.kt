@@ -57,7 +57,7 @@ class GroupDao(val daoFactory: DaoFactory) : Dao<Group, String> {
 
         val group = Group(groupName, *members.toTypedArray())
 
-        val workTrack = daoFactory.workTrackDao.read(workTrackID)
+        val workTrack = if (workTrackID != 0) daoFactory.workTrackDao.read(workTrackID) else null
         if (workTrack != null)
             Work.createWork(group, workTrack)
 

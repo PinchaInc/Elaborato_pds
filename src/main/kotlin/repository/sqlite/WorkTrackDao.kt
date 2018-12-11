@@ -42,7 +42,10 @@ class WorkTrackDao : Dao<WorkTrack, Int> {
             return null
 
         val workTrack = WorkTrack(result.getString("title"), result.getString("body"))
-        workTrack.id = result.getInt("id")
+
+        val id = result.getInt("id")
+        if (id != 0)
+            workTrack.id = id
 
         return workTrack
     }
