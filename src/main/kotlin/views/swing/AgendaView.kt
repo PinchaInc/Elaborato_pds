@@ -2,11 +2,14 @@ package views.swing
 
 import Util.MessageType
 import controllers.AgendaController
+import model.FinalReview
 import model.Meeting
 import model.Model
+import model.Review
 import views.AgendaView
 import java.awt.BorderLayout
 import java.awt.GridLayout
+import java.lang.Exception
 import java.util.Calendar
 import java.util.Date
 import java.util.GregorianCalendar
@@ -15,6 +18,8 @@ import javax.swing.JButton
 import javax.swing.JLabel
 import javax.swing.JPanel
 import javax.swing.JTable
+import javax.swing.JTextArea
+import javax.swing.JTextField
 import javax.swing.table.DefaultTableModel
 
 class AgendaView : AgendaView {
@@ -33,6 +38,10 @@ class AgendaView : AgendaView {
     private val yearLabel = JLabel()
     private val monthLabel = JLabel()
     private val calendar = GregorianCalendar()
+    private val titleField = JTextField()
+    private val bodyField = JTextArea()
+    private val ratingField = JTextField()
+    private val addReview = JButton("Add Review")
 
     init {
         calendar.time = Date()
@@ -45,8 +54,8 @@ class AgendaView : AgendaView {
             navigationJPanel {
 
                 layout = GridLayout(1, 2)
-                add(groups)
                 add(students)
+                add(groups)
             }
 
             val bodyJPanel = JPanel()
@@ -119,9 +128,11 @@ class AgendaView : AgendaView {
                         val columJPanel = JPanel()
                         columJPanel {
 
-                            layout = GridLayout(1, 2)
+                            layout = GridLayout(1, 4)
                             add(JLabel("Day"))
                             add(JLabel("Group"))
+                            add(JLabel("Review"))
+                            add(JLabel("Rating"))
                         }
 
                         layout = BorderLayout()
@@ -134,7 +145,56 @@ class AgendaView : AgendaView {
                     add(tableJPanel, BorderLayout.CENTER)
                 }
 
+                val controllJPanel = JPanel()
+                controllJPanel {
+
+                    val addReviewJPanel = JPanel()
+                    addReviewJPanel {
+
+                        val fieldJPanel = JPanel()
+                        fieldJPanel {
+
+                            val titleJPanel = JPanel()
+                            titleJPanel {
+
+                                layout = BorderLayout()
+                                add(JLabel("Title"), BorderLayout.NORTH)
+                                add(titleField, BorderLayout.CENTER)
+                            }
+
+                            val bodyFieldJPanel = JPanel()
+                            bodyFieldJPanel {
+
+                                layout = BorderLayout()
+                                add(JLabel("Body"), BorderLayout.NORTH)
+                                add(bodyField, BorderLayout.CENTER)
+                            }
+
+                            val ratingJPanel = JPanel()
+                            ratingJPanel {
+
+                                layout = BorderLayout()
+                                add(JLabel("Rating"), BorderLayout.NORTH)
+                                add(ratingField, BorderLayout.CENTER)
+                            }
+
+                            layout = GridLayout(3, 1)
+                            add(titleJPanel)
+                            add(bodyFieldJPanel)
+                            add(ratingJPanel)
+                        }
+
+                        layout = BorderLayout()
+                        add(fieldJPanel, BorderLayout.CENTER)
+                        add(addReview, BorderLayout.SOUTH)
+                    }
+
+                    add(addReviewJPanel)
+                }
+
+                layout = GridLayout(1, 2)
                 add(calendarJPanel)
+                add(controllJPanel)
             }
 
             layout = BorderLayout()
@@ -149,19 +209,36 @@ class AgendaView : AgendaView {
         frame.pack()
     }
 
-    override fun selectGroup() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
     override fun setController(controller: AgendaController) {
         students.addActionListener { controller.startStudents() }
+
         groups.addActionListener { controller.startGroups() }
+
+        addReview.addActionListener {
+            val selectedRows = meetingsJTable.selectedRows
+            if (selectedRows.size != 1)
+                showMessage("error", MessageType.ERROR)
+            else {
+                val pos = model.getMeetings().indexOf(filterMeetings(model.getMeetings())[selectedRows[0]])
+                if (ratingField.text.isBlank())
+                    controller.addReview(pos, titleField.text, bodyField.text)
+                else {
+                    try {
+                        val rating = ratingField.text.toInt()
+                        controller.addReview(pos, titleField.text, bodyField.text, rating)
+                    } catch (e: Exception) {
+                        showMessage("error", MessageType.ERROR)
+                    }
+                }
+            }
+        }
     }
 
     override fun setModel(model: Model) {
         this.model = model
         (model as Observable).addObserver(this)
-        arrayOf("Day", "Group").forEach { meetingsModel.addColumn(it) }
+
+        arrayOf("Day", "Group", "Review", "Rating").forEach { meetingsModel.addColumn(it) }
         populateTable(
             *filterMeetings(
                 model.getMeetings()
@@ -176,6 +253,8 @@ class AgendaView : AgendaView {
     override fun update(p0: Observable?, p1: Any?) {
         when (p1) {
             is Meeting -> updateCalendar()
+
+            is Review -> updateCalendar()
         }
     }
 
@@ -183,9 +262,12 @@ class AgendaView : AgendaView {
         meetings
             .map {
                 calendar.time = it.start
+                val review = it.review
                 arrayOf(
                     calendar.get(Calendar.DAY_OF_MONTH),
-                    it.group.name
+                    it.group.name,
+                    review?.body ?: "",
+                    if (review != null && review is FinalReview) review.rating else ""
                 )
             }
             .toTypedArray()
@@ -196,7 +278,8 @@ class AgendaView : AgendaView {
         return meetings
             .filter {
                 calendar.time = it.start
-                calendar.get(Calendar.MONTH) == month && calendar.get(Calendar.YEAR) == year }
+                calendar.get(Calendar.MONTH) == month && calendar.get(Calendar.YEAR) == year
+            }
             .toTypedArray()
     }
 
@@ -205,12 +288,14 @@ class AgendaView : AgendaView {
             month = 0
             year++
         }
+
         if (month == -1) {
             month = 11
             year--
         }
+
         yearLabel.text = year.toString()
-        monthLabel.text = (month+1).toString()
+        monthLabel.text = (month + 1).toString()
     }
 
     private fun updateCalendar() {

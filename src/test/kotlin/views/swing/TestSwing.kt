@@ -7,6 +7,7 @@ import model.Course
 import model.Group
 import model.Meeting
 import model.Model
+import model.Review
 import model.Student
 import model.Tutor
 import model.User
@@ -59,24 +60,16 @@ fun main(args: Array<String>) {
                     return course.getWorkTracks()
                 }
 
-                override fun assignWorkTrack(groupID: Int, workTrackID: Int): Boolean {
-                    if (!course.assignWorkTrack(groupID, workTrackID))
-                        return false
-                    setChanged()
-                    notifyObservers(course.getGroups())
-                    return true
-                }
-
                 override fun getGroup(groupID: Int): Group? {
                     return course.getGroup(groupID)
                 }
 
                 override fun getWorkTrack(workTrackID: Int): WorkTrack? {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    return course.getWorkTrack(workTrackID)
                 }
 
                 override fun getMeeting(meetingID: Int): Meeting? {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    return user.getMeeting(meetingID)
                 }
 
                 override fun getAccount(username: Int): Account? {
@@ -117,7 +110,7 @@ fun main(args: Array<String>) {
 
                 override fun addWorkTrack(workTrack: WorkTrack): Boolean {
                     if (!course.addWorkTrack(workTrack))
-                        return true
+                        return false
                     setChanged()
                     notifyObservers(workTrack)
                     return true
@@ -132,10 +125,27 @@ fun main(args: Array<String>) {
                         Agenda(user)
                     else
                         user.agenda!!
-                    agenda.addMeeting(meeting)
+                    return if (agenda.addMeeting(meeting)) {
+                        setChanged()
+                        notifyObservers(meeting)
+                        true
+                    } else false
+                }
+
+                override fun addReview(meeting: Meeting, review: Review): Boolean {
+                    meeting.review = review
                     setChanged()
-                    notifyObservers(meeting)
+                    notifyObservers(review)
                     return true
+                }
+
+                override fun createWork(group: Group, workTrack: WorkTrack): Boolean {
+                    val work = Work.createWork(group, workTrack)
+                    return if (work != null) {
+                        setChanged()
+                        notifyObservers(course.getGroups())
+                        true
+                    } else false
                 }
             }
         }
