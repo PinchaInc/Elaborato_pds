@@ -117,7 +117,7 @@ abstract class ConcreteModel : Observable(), Model {
         if (Work.createWork(group, workTrack) == null)
             return false
 
-        if (!repo.saveGroup(group))
+        if (!repo.updateGroup(group))
             return false
 
         setChanged()

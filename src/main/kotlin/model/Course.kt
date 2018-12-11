@@ -25,6 +25,7 @@ class Course(val name: String, val year: Int) {
     fun addGroup(group: Group): Boolean {
         return if (groups.none { it.name == group.name }) {
             groups.add(group)
+            group.course = this
             true
         } else false
     }
