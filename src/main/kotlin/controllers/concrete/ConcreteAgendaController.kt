@@ -26,14 +26,20 @@ class ConcreteAgendaController(
     override fun startGroups() = application.startGroups()
 
     override fun addReview(meetingID: Int, reviewTitle: String, reviewBody: String, reviewRating: Int?) {
-        val meeting = model.getMeeting(meetingID)
-        if (meeting != null) {
-            val review = if (reviewRating == null)
-                Review(reviewTitle, reviewBody)
-            else FinalReview(reviewTitle, reviewBody, reviewRating)
-            meeting.review = review
-            view.showMessage("ok")
-        } else
-            view.showMessage("error", MessageType.ERROR)
+        if (reviewTitle.isBlank() || reviewBody.isBlank())
+            view.showMessage("Compilare tutti i campi", MessageType.ERROR)
+        else {
+            val meeting = model.getMeeting(meetingID)
+            if (meeting != null) {
+                val review = if (reviewRating == null)
+                    Review(reviewTitle, reviewBody)
+                else FinalReview(reviewTitle, reviewBody, reviewRating)
+                if (model.addReview(meeting, review))
+                    view.showMessage("ok")
+                else
+                    view.showMessage("error", MessageType.ERROR)
+            } else
+                view.showMessage("error", MessageType.ERROR)
+        }
     }
 }

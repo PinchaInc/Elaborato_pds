@@ -15,8 +15,6 @@ class TestAgendaController : TestControllersHelper() {
     val viewOk = object : AgendaView {
         override fun start() {}
 
-        override fun selectGroup() {}
-
         override fun setController(controller: AgendaController) {}
 
         override fun setModel(model: Model) {}
@@ -28,8 +26,6 @@ class TestAgendaController : TestControllersHelper() {
 
     val viewError = object : AgendaView {
         override fun start() {}
-
-        override fun selectGroup() {}
 
         override fun setController(controller: AgendaController) {}
 

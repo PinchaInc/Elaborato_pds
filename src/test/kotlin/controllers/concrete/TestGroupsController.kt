@@ -39,7 +39,7 @@ class TestGroupsController : TestControllersHelper() {
 
     @Test
     fun testAssignWork() {
-        controllerOk.assignWork(1, 1)
+        controllerOk.assignWork(10, 1)
     }
 
     @Test

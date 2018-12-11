@@ -26,25 +26,33 @@ class ConcreteStudentsController(
     override fun startGroups() = application.startGroups()
 
     override fun addStudent(name: String, surname: String, id: Int) {
-        val student = Student(name, surname, id)
-        if (model.addStudent(student))
-            view.showMessage("ok")
-        else
-            view.showMessage("error", MessageType.ERROR)
+        if (name.isBlank() || surname.isBlank())
+            view.showMessage("Compilare tutti i campi", MessageType.ERROR)
+        else {
+            val student = Student(name, surname, id)
+            if (model.addStudent(student))
+                view.showMessage("ok")
+            else
+                view.showMessage("error", MessageType.ERROR)
+        }
     }
 
     override fun addGroup(groupName: String, vararg studentsID: Int) {
-        val students = studentsID.map { model.getStudent(it) }
-        if (students.none { it == null }) {
-            val group = Group.createGroup(groupName, *students.map { it!! }.toTypedArray())
-            if (group != null) {
-                if (model.addGroup(group))
-                    view.showMessage("OK")
-                else
-                    view.showMessage("error", MessageType.ERROR)
+        if (studentsID.isEmpty() || groupName.isBlank())
+            view.showMessage("Compilare tutti i campi", MessageType.ERROR)
+        else {
+            val students = studentsID.map { model.getStudent(it) }
+            if (students.none { it == null }) {
+                val group = Group.createGroup(groupName, *students.map { it!! }.toTypedArray())
+                if (group != null) {
+                    if (model.addGroup(group))
+                        view.showMessage("OK")
+                    else
+                        view.showMessage("Errore aggiunta gruppo", MessageType.ERROR)
+                } else
+                    view.showMessage("Errore creazione gruppo", MessageType.ERROR)
             } else
-                view.showMessage("Error", MessageType.ERROR)
-        } else
-            view.showMessage("Error", MessageType.ERROR)
+                view.showMessage("Studenti non validi", MessageType.ERROR)
+        }
     }
 }

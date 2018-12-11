@@ -31,8 +31,10 @@ class ConcreteGroupsController(
         val group = model.getGroup(groupID)
         val workTrack = model.getWorkTrack(workTrackID)
         if (group != null && workTrack != null) {
-            Work.createWork(group, workTrack)
-            view.showMessage("ok")
+            if (model.createWork(group, workTrack))
+                view.showMessage("ok")
+            else
+                view.showMessage("error", MessageType.ERROR)
         } else
             view.showMessage("error", MessageType.ERROR)
     }
@@ -40,16 +42,23 @@ class ConcreteGroupsController(
     override fun addMeeting(groupID: Int, stratDate: Date, endDate: Date) {
         val group = model.getGroup(groupID)
         if (group?.work != null) {
-            Meeting(group, stratDate, endDate)
-            view.showMessage("OK")
+            val meeting = Meeting(group, stratDate, endDate)
+            if (model.addMeeting(meeting))
+                view.showMessage("OK")
+            else
+                view.showMessage("Numero massimo di meeting ragiunto", MessageType.ERROR)
         } else
             view.showMessage("error", MessageType.ERROR)
     }
 
     override fun addWorkTrack(title: String, body: String) {
-        if (model.addWorkTrack(WorkTrack(title, body)))
-            view.showMessage("ok")
-        else
-            view.showMessage("error", MessageType.ERROR)
+        if (title.isBlank() || body.isBlank())
+            view.showMessage("Compilare tutti i campi", MessageType.ERROR)
+        else {
+            if (model.addWorkTrack(WorkTrack(title, body)))
+                view.showMessage("ok")
+            else
+                view.showMessage("error", MessageType.ERROR)
+        }
     }
 }

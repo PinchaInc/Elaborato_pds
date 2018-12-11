@@ -5,6 +5,7 @@ import model.Account
 import model.Group
 import model.Meeting
 import model.Model
+import model.Review
 import model.Student
 import model.Work
 import model.WorkTrack
@@ -13,7 +14,19 @@ import java.util.Date
 
 open class TestControllersHelper {
     val modelError = object : Model {
-        override fun assignWorkTrack(groupID: Int, workTrackID: Int): Boolean {
+        override fun createWork(group: Group, workTrack: WorkTrack): Boolean {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+        override fun addReview(meeting: Meeting, review: Review): Boolean {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+        override fun addMeeting(meeting: Meeting): Boolean {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+        override fun getMeetings(): Array<Meeting> {
             TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
 
@@ -79,7 +92,20 @@ open class TestControllersHelper {
             meeting = Meeting(group, Date(), Date())
         }
 
-        override fun assignWorkTrack(groupID: Int, workTrackID: Int): Boolean {
+        override fun createWork(group: Group, workTrack: WorkTrack): Boolean {
+            return Work.createWork(group, workTrack) != null
+        }
+
+        override fun addReview(meeting: Meeting, review: Review): Boolean {
+            meeting.review = review
+            return true
+        }
+
+        override fun addMeeting(meeting: Meeting): Boolean {
+            return true
+        }
+
+        override fun getMeetings(): Array<Meeting> {
             TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
 
@@ -107,10 +133,11 @@ open class TestControllersHelper {
             return true
         }
 
-
-
         override fun getGroup(groupID: Int): Group? {
-            return group
+            return when (groupID) {
+                10 -> Group("test")
+                else -> group
+            }
         }
 
         override fun getWorkTrack(workTrackID: Int): WorkTrack? {

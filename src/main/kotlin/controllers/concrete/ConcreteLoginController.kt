@@ -26,14 +26,18 @@ class ConcreteLoginController(
     override fun startStudents() = application.startStudents()
 
     override fun authenticate(username: Int, password: String) {
-        val account = model.getAccount(username)
-        if (account == null || !account.authenticate(password))
-            view.showMessage("Error", MessageType.ERROR)
+        if (password.isBlank())
+            view.showMessage("Inserisci la password", MessageType.ERROR)
         else {
-            if (model.loadUser(username))
-                application.startStudents()
-            else
-                view.showMessage("error", MessageType.ERROR)
+            val account = model.getAccount(username)
+            if (account == null || !account.authenticate(password))
+                view.showMessage("Error", MessageType.ERROR)
+            else {
+                if (model.loadUser(username))
+                    application.startStudents()
+                else
+                    view.showMessage("error", MessageType.ERROR)
+            }
         }
     }
 }
