@@ -1,9 +1,11 @@
 package views.swing;
 
+import Util.MessageType;
+
 import javax.swing.*;
 
 class Frame {
-    private static Frame istance;
+    private static Frame instance;
     private JFrame frame;
 
     private Frame() {
@@ -13,15 +15,22 @@ class Frame {
     }
 
 
-    synchronized static Frame getIstance() {
-        if (istance==null) {
-           istance = new Frame();
+    synchronized static Frame getInstance() {
+        if (instance ==null) {
+           instance = new Frame();
         }
 
-        return istance;
+        return instance;
     }
 
     JFrame getFrame() {
         return frame;
+    }
+
+    void showMessage(String message, MessageType type) {
+        if (type == MessageType.ERROR)
+            new JOptionPane(message, JOptionPane.ERROR_MESSAGE).createDialog(message).show();
+        else
+            JOptionPane.showMessageDialog(frame, message);
     }
 }

@@ -6,10 +6,15 @@ import junit.framework.TestCase.assertEquals
 import model.Model
 import org.junit.Test
 import views.StudentsView
+import java.util.Observable
 
 class TestStudentsController: TestControllersHelper() {
 
     val viewOk = object : StudentsView {
+        override fun update(p0: Observable?, p1: Any?) {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
         override fun start() {
             TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
@@ -21,21 +26,13 @@ class TestStudentsController: TestControllersHelper() {
         override fun showMessage(message: String, type: MessageType) {
             assertEquals(MessageType.STANDARD, type)
         }
-
-        override fun insertNewStudentData() {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
-
-        override fun selectStudent() {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
-
-        override fun insertName() {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
     }
 
     val viewError = object : StudentsView {
+        override fun update(p0: Observable?, p1: Any?) {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
         override fun start() {
             TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
@@ -46,18 +43,6 @@ class TestStudentsController: TestControllersHelper() {
 
         override fun showMessage(message: String, type: MessageType) {
             assertEquals(MessageType.ERROR, type)
-        }
-
-        override fun insertNewStudentData() {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
-
-        override fun selectStudent() {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
-
-        override fun insertName() {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
     }
 
