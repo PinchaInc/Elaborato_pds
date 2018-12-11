@@ -1,6 +1,5 @@
 package model
 
-// TODO
 interface Model {
     fun getGroup(groupID: Int): Group?
     fun getWorkTrack(workTrackID: Int): WorkTrack?
@@ -15,5 +14,8 @@ interface Model {
     fun getGroups(): Array<Group>
     fun getWorkTracks(): Array<WorkTrack>
     fun addWorkTrack(workTrack: WorkTrack): Boolean
-    fun assignWorkTrack(groupID: Int, workTrackID: Int): Boolean
+    fun getMeetings(): Array<Meeting>
+    fun addMeeting(meeting: Meeting): Boolean
+    fun addReview(meeting: Meeting, review: Review): Boolean
+    fun createWork(group: Group, workTrack: WorkTrack): Boolean
 }

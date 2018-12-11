@@ -1,6 +1,5 @@
 package model
 
-
 sealed class User(
     val name: String,
     val surname: String,
@@ -21,6 +20,10 @@ sealed class User(
         else
             agenda!!.getMeeting(meetingID)
     }
+
+    fun getMeetings(): Array<Meeting> {
+        return agenda?.getMeetings() ?: arrayOf()
+    }
 }
 
 class Tutor(
@@ -28,11 +31,11 @@ class Tutor(
     surname: String,
     email: String,
     id: Int
-): User(name, surname, email, id)
+) : User(name, surname, email, id)
 
 class Professor(
     name: String,
     surname: String,
     email: String,
     id: Int
-): User(name, surname, email, id)
+) : User(name, surname, email, id)

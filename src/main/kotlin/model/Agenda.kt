@@ -8,11 +8,14 @@ data class Agenda(val owner: User) {
 
     private val meetings: ArrayList<Meeting> = ArrayList()
 
-    fun addMeeting(meeting: Meeting) {
+    fun addMeeting(meeting: Meeting): Boolean {
         if (meetings.none { it.id == meeting.id && it.group.name == meeting.group.name }) {
             meetings.add(meeting)
             meeting.owner = owner
+            meetings.sortBy { it.start }
+            return true
         }
+        return false
     }
 
     fun removeMeeting(meeting: Meeting) {

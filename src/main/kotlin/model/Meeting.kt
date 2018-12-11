@@ -7,7 +7,7 @@ data class Meeting(val group: Group, val start: Date, val end: Date) {
     var owner: User? = null
     var review: Review? = null
         set(r) {
-            if (field == null && r != null) {
+            if (r != null) {
                 field = r
                 r.meeting = this
                 r.group = group
