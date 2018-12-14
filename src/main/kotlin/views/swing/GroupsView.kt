@@ -146,8 +146,8 @@ class GroupsView : views.GroupsView {
             }
 
             layout = BorderLayout()
-            add(navigationJPanel, BorderLayout.NORTH)
             add(bodyJPanel, BorderLayout.CENTER)
+            add(navigationJPanel, BorderLayout.SOUTH)
         }
     }
 
