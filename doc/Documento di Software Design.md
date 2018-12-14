@@ -377,7 +377,7 @@ create table "group"
 	course_name varchar(50),
 	course_year int,
 	work_track int,
-	primary key (name, course_name, course_year),
+	primary key name,
 	foreign key (course_name, course_year) references course
 );
 ```
