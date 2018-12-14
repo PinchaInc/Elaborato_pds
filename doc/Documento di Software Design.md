@@ -339,6 +339,14 @@ Di seguito è riportato un DCD completo del sistema e alcuni sequence e activity
 
 ![sd3][sd3]
 
+![ad1] [ad1]
+
+![ad2] [ad2]
+
+![ad3] [ad3]
+
+![ad4][ad4]
+
 ---
 
 ## 5. Progetto del Database
@@ -647,3 +655,10 @@ Di seguito è riportato lo schema completo del database.
 [groups]: img/groups.png
 [agenda]: img/agenda.png
 [logo]: img/logo.png
+[ad1]: img/ad1.png
+[ad2]: img/ad2.png
+[ad3]: img/ad3.png
+[ad4]: img/ad4.png
+
+
+
