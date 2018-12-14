@@ -19,4 +19,13 @@ data class Meeting(val group: Group, val start: Date, val end: Date) {
         if (group.addMeeting(this))
             id = group.increaseMeeting()
     }
+
+    companion object {
+        fun makeMeeting(group: Group, start: Date): Meeting? {
+            return if (start.before(Date()))
+                null
+            else
+                Meeting(group, start, start)
+        }
+    }
 }

@@ -37,7 +37,7 @@ class Course(val name: String, val year: Int) {
 
     fun addWorkTrack(workTrack: WorkTrack): Boolean {
         workTrack.id = generateId(workTrack)
-        return if (workTracks.none { it.id == workTrack.id}) {
+        return if (workTracks.none { it.id == workTrack.id || it.title == workTrack.title }) {
             workTracks.add(workTrack)
             workTrack.course = this
             true
@@ -50,20 +50,19 @@ class Course(val name: String, val year: Int) {
     }
 
     fun addTeacher(teacher: User): Boolean {
-        when (teacher) {
+        return when (teacher) {
             is Professor -> {
-                return if (!professors.contains(teacher)) {
+                if (!professors.contains(teacher)) {
                     professors.add(teacher)
                     true
                 } else false
             }
             is Tutor -> {
-                return if (!tutors.contains(teacher)) {
+                if (!tutors.contains(teacher)) {
                     tutors.add(teacher)
                     true
                 } else false
             }
-            else -> return false
         }
     }
 
@@ -141,7 +140,7 @@ class Course(val name: String, val year: Int) {
 
     private fun generateId(w: WorkTrack): Int {
         return if (w.id == null)
-            name.hashCode()+year+w.title.hashCode()+w.body.hashCode()
+            name.hashCode() + year + w.title.hashCode() + w.body.hashCode()
         else
             w.id!!
     }

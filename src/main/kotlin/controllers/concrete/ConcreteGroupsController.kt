@@ -32,23 +32,27 @@ class ConcreteGroupsController(
         val workTrack = model.getWorkTrack(workTrackID)
         if (group != null && workTrack != null) {
             if (model.createWork(group, workTrack))
-                view.showMessage("ok")
+                view.showMessage("Work track aggiunto con successo")
             else
-                view.showMessage("error", MessageType.ERROR)
+                view.showMessage("Non è stato possibile assegnare la traccia al gruppo", MessageType.ERROR)
         } else
-            view.showMessage("error", MessageType.ERROR)
+            view.showMessage("Si è verificato un errore, riprovare più tardi", MessageType.ERROR)
     }
 
     override fun addMeeting(groupID: Int, stratDate: Date, endDate: Date) {
         val group = model.getGroup(groupID)
         if (group?.work != null) {
-            val meeting = Meeting(group, stratDate, endDate)
-            if (model.addMeeting(meeting))
-                view.showMessage("OK")
-            else
-                view.showMessage("Numero massimo di meeting ragiunto", MessageType.ERROR)
+            val meeting = Meeting.makeMeeting(group, stratDate)
+            if (meeting == null)
+                view.showMessage("Non puoi tornare indietro nel tempo", MessageType.ERROR)
+            else {
+                if (model.addMeeting(meeting))
+                    view.showMessage("Meeting aggiunto con successo")
+                else
+                    view.showMessage("Numero massimo di meeting ragiunto", MessageType.ERROR)
+            }
         } else
-            view.showMessage("error", MessageType.ERROR)
+            view.showMessage("Il gruppo non ha ancora un elaborato", MessageType.ERROR)
     }
 
     override fun addWorkTrack(title: String, body: String) {
@@ -56,9 +60,9 @@ class ConcreteGroupsController(
             view.showMessage("Compilare tutti i campi", MessageType.ERROR)
         else {
             if (model.addWorkTrack(WorkTrack(title, body)))
-                view.showMessage("ok")
+                view.showMessage("Work track aggiunta con successo")
             else
-                view.showMessage("error", MessageType.ERROR)
+                view.showMessage("Non è stato possibile aggiungere la traccia, riprovare più tardi", MessageType.ERROR)
         }
     }
 }

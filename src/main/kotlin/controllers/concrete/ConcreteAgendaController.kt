@@ -33,13 +33,17 @@ class ConcreteAgendaController(
             if (meeting != null) {
                 val review = if (reviewRating == null)
                     Review(reviewTitle, reviewBody)
-                else FinalReview(reviewTitle, reviewBody, reviewRating)
-                if (model.addReview(meeting, review))
-                    view.showMessage("ok")
-                else
-                    view.showMessage("error", MessageType.ERROR)
+                else FinalReview.makeFinalReview(reviewTitle, reviewBody, reviewRating)
+                if (review == null)
+                    view.showMessage("Il voto deve essere compreso tra 1 e 30", MessageType.ERROR)
+                else {
+                    if (model.addReview(meeting, review))
+                        view.showMessage("Review aggiunta con successo")
+                    else
+                        view.showMessage("Non è stato possibile aggiungere la review, riprovare più tardi", MessageType.ERROR)
+                }
             } else
-                view.showMessage("error", MessageType.ERROR)
+                view.showMessage("Non è stato possibile trovare il meeting, riprovare più tradi", MessageType.ERROR)
         }
     }
 }
