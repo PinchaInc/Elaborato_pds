@@ -301,7 +301,7 @@ Inoltre è presenta la classe astratta `Application` che coordina il lavoro dei 
 
 ![model][model]
 
-Nel paackage `model` sono racchiuse tutte le classi specifiche del dominio applicativo.
+Nel package `model` sono racchiuse tutte le classi specifiche del dominio applicativo.
 Per facilitare l'accesso a questo sotto sistema si è utilizzato il pattern *Facade*. L'interfaccia `Model` permette di disaccoppiare quest'ultima dalla sua implementazione. L'implementazione è contenuta nella classe astratta `ConcreteModel` che espone il metodo astratto `makeRepository()` che permette di disaccoppiare il modello dal gestore per la persistenza dei dati.
 Allo stato attuale non ci sarebbe bisogno di avere classi separate per i tutor e i professori in quanto hanno eguali responsabilità, ma si è optato per delle classi separate per consentire una maggiore flessibilità ad eventuali modifiche future. Per fare ciò si è definita una `sealed class User` che viene estesa in due sottoclassi `Tutor` e `Professor`. Si è scelto di usare una `sealed class` invece di una classe astratta per aver maggiore controllo sulle sottoclassi.
 
@@ -317,7 +317,7 @@ La classe astratta `Repository` si occupa di gestire tutte le richieste di acces
 - `prepareCourseStatament()` che permette di generare la query in grado di ricavare il corso dato il docente.
 Per la gestione dei dato si è optato per un *abstract factory*. Tutti i prodotti implementano la classe generica `Dao<T, ID>`. In particolare è possibile distinguere otto prodotti concreti.
 All'interno del sub-package `sqlite` è contenuta la famiglia dei dao per un database *sqlite* e la concrete factory ad essi associata. Inoltre è presente il *singleton* `Connection` che fornisce un punto di accesso globale alla connessione con il database, in questo modo si evita che ogni singolo dao debba gestire autonomamente la connessione.
-Sempre nel package `repository` è contenuta la classe `MeetingHelpper` usata per semplificare le operazioni di lettura e scrittura di un oggetto di tipo `Meeting`.
+Sempre nel package `repository` è contenuta la classe `MeetingHelper` usata per semplificare le operazioni di lettura e scrittura di un oggetto di tipo `Meeting`.
 
 ---
 
@@ -325,7 +325,7 @@ Sempre nel package `repository` è contenuta la classe `MeetingHelpper` usata pe
 
 ![views][views]
 
-Le package `views` sono contenute le view.
+Nel package `views` sono contenute le view.
 Per la creazione dei form per la comunicazione con gli utenti si è scelto di usare ancora una volta un'*abstract factory*. In questo caso i prodotti sono quattro, uno per ogni schermata.
 Nel sub-package `swing` è contenuta l'implementazione delle *views* con la libreria grafica *swing*. Oltre ai prodotti concreti nel package `swing` è contenuto il *singleton* `Frame` che fornisce alle varie *views* il frame. Inoltre mette a disposizione anche un gestore dei messaggi centralizzato.
 
@@ -347,9 +347,15 @@ Di seguito è riportato un DCD completo del sistema e alcuni sequence e activity
 
 ![sd4][]
 
+---
+
 ![sd4.1][]
 
+---
+
 ![sd4.2][]
+
+---
 
 ![sd4.3][]
 
@@ -531,7 +537,9 @@ $$
 \text{WorkTrack} \equiv \{ \underline{id} \text{, } {\color{red}\underline{course\_name} \text{, } \underline{course\_year}} \text{, title, body} \}
 $$
 
-Di seguito è riportato lo schema completo del database.
+---
+
+Di seguito è riportato lo schema grafico del database.
 
 ![database][database]
 
