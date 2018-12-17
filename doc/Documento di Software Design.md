@@ -523,10 +523,10 @@ Di seguito è riportato lo schema completo del database.
 
 #### Classi di equivalenza
 
-| Condizione | Valide                                       | Non valide                                               |
-| ---------- | -------------------------------------------- | -------------------------------------------------------- |
-| Username   | - $CE_1$ campo non vuoto e username presente | - $CE_2$ campo vuoto<br />- $CE_3$ username non presente |
-| Password   | - $CE_4$ password corretta                   | - $CE_5$ campo vuoto<br />- $CE_6$ password errata       |
+| Condizione | Valide                                                       | Non valide                                               |
+| ---------- | ------------------------------------------------------------ | -------------------------------------------------------- |
+| Username   | - $CE_1$ campo non vuoto e username presente                 | - $CE_2$ campo vuoto<br />- $CE_3$ username non presente |
+| Password   | - $CE_4$ password esistente e associata allo username indicato | - $CE_5$ campo vuoto<br />- $CE_6$ password errata       |
 
 #### Test case
 
@@ -634,17 +634,18 @@ Di seguito è riportato lo schema completo del database.
 | Condizione | Valide                                                       | Non valide                                                   |
 | ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | Gruppo     | - $CE_1$ gruppo presente con work track con meno di 5 meeting | - $CE_2$ gruppo senza work track<br />- $CE_3$ gruppo con già 5 meeting<br />- $CE_4$ gruppo non presente |
-| Data       | - $CE_5$ formato valido                                      | - $CE_6$ formato non valido                                  |
+| Data       | - $CE_5$ formato valido e data successiva a quella odierna   | - $CE_6$ formato non valido<br />- $CE_7$ data precedente a quella odierna |
 
 #### Test case
 
-| Test case | Gruppo                                    | Data               | Classi coperte         |
-| --------- | ----------------------------------------- | ------------------ | ---------------------- |
-| $TC_1$    | gruppo con work track e meno di 5 meeting | formato valido     | - $CE_1$<br />- $CE_5$ |
-| $TC_2$    | gruppo con work track e meno di 5 meeting | formato non valido | - $CE_1$<br />- $CE_6$ |
-| $TC_3$    | gruppo senza work track                   | formato valido     | - $CE_2$<br />- $CE_5$ |
-| $TC_4$    | gruppo con già 5 meeting                  | formato valido     | - $CE_3$<br />- $CE_5$ |
-| $TC_5$    | gruppo non presente                       | formato valido     | - $CE_4$<br />- $CE_5$ |
+| Test case | Gruppo                                    | Data                                              | Classi coperte         |
+| --------- | ----------------------------------------- | ------------------------------------------------- | ---------------------- |
+| $TC_1$    | gruppo con work track e meno di 5 meeting | formato valido e data successiva a quella odierna | - $CE_1$<br />- $CE_5$ |
+| $TC_2$    | gruppo con work track e meno di 5 meeting | formato non valido                                | - $CE_1$<br />- $CE_6$ |
+| $TC_3$    | gruppo senza work track                   | formato valido e data successiva a quella odierna | - $CE_2$<br />- $CE_5$ |
+| $TC_4$    | gruppo con già 5 meeting                  | formato valido e data successiva a quella odierna | - $CE_3$<br />- $CE_5$ |
+| $TC_5$    | gruppo non presente                       | formato valido e data successiva a quella odierna | - $CE_4$<br />- $CE_5$ |
+| $TC_6$    | gruppo con work track e meno di 5 meeting | data precedente a quella odierna                  | - $CE_1$<br />- $CE_7$ |
 
 ---
 
