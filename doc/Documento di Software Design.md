@@ -475,6 +475,42 @@ create table workTrack
 );
 ```
 
+
+
+### Schema del Database 
+
+$$
+\text{Account} \equiv \{\underline{\text{id}} \text{, password\}}
+$$
+
+$$
+\text{Course} \equiv \{\underline{name} \text{, } \underline{year} \}
+$$
+
+$$
+\text{Group} \equiv \{\underline{name} \text{, } \underline{course\_name} \text{, } \underline{course\_year} \text{, worktrack}\}
+$$
+
+$$
+\text{Meeting} \equiv \{\text{owner, } \underline{group} \text{, } \underline{id} \text{, start, end} \}
+$$
+
+$$
+\text{Review} \equiv \{ \underline{group} \text{, } \underline{id} \text{, title, body, type, rating} \}
+$$
+
+$$
+\text{Student} \equiv \{ \underline{id} \text{, name, surname, group, course_name, course_year} \}
+$$
+
+$$
+\text{User} \equiv \{ \underline{id} \text{, name, surname, email, type, course_name, course_type} \}
+$$
+
+$$
+\text{WorkTrack} \equiv \{ \underline{id} \text{, } \underline{course\_name} \text{, } \underline{course\_year} \text{, title, body} \}
+$$
+
 Di seguito è riportato lo schema completo del database.
 
 ![database][database]
@@ -487,10 +523,10 @@ Di seguito è riportato lo schema completo del database.
 
 #### Classi di equivalenza
 
-| Condizione | Valide                     | Non valide                                          |
-| ---------- | -------------------------- | --------------------------------------------------- |
-| Username   | - $CE_1$ username presente | - $CE_2$ campo vuoto<br />- $CE_3$ username assente |
-| Password   | - $CE_4$ password corretta | - $CE_5$ campo vuoto<br />- $CE_6$ password errata  |
+| Condizione | Valide                                       | Non valide                                               |
+| ---------- | -------------------------------------------- | -------------------------------------------------------- |
+| Username   | - $CE_1$ campo non vuoto e username presente | - $CE_2$ campo vuoto<br />- $CE_3$ username non presente |
+| Password   | - $CE_4$ password corretta                   | - $CE_5$ campo vuoto<br />- $CE_6$ password errata       |
 
 #### Test case
 
@@ -508,43 +544,43 @@ Di seguito è riportato lo schema completo del database.
 
 #### Classi di equivalenza
 
-| Condizione | Valide                          | Non valide                                            |
-| ---------- | ------------------------------- | ----------------------------------------------------- |
-| Matricola  | - $CE_1$ matricola non presente | - $CE_2$ campo vuoto<br />- $CE_3$ matricola presente |
-| Nome       | - $CE_4$ nome inserito          | - $CE_5$ campo vuoto                                  |
-| Cognome    | - $CE_6$ cognome inserito       | - $CE_7$ campo vuoto                                  |
+| Condizione | Valide                                            | Non valide                                            |
+| ---------- | ------------------------------------------------- | ----------------------------------------------------- |
+| Matricola  | - $CE_1$ campo non vuoto e matricola non presente | - $CE_2$ campo vuoto<br />- $CE_3$ matricola presente |
+| Nome       | - $CE_4$ campo non vuoto                          | - $CE_5$ campo vuoto                                  |
+| Cognome    | - $CE_6$ campo non vuoto                          | - $CE_7$ campo vuoto                                  |
 
 #### Test case
 
-| Test case | Matricola | Nome    | Cognome  | Classi coperte                       |
-| --------- | --------- | ------- | -------- | ------------------------------------ |
-| $TC_1$    | 620111    | Nome1   | Cognome1 | - $CE_1$<br />- $CE_4$<br />- $CE_6$ |
-| $TC_2$    | `vuoto`   | Nome1   | Cognome1 | - $CE_2$<br />- $CE_4$<br />- $CE_6$ |
-| $TC_3$    | 620001    | Nome1   | Cognome1 | - $CE_3$<br />- $CE_4$<br />- $CE_6$ |
-| $TC_4$    | 620111    | `vuoto` | Cognome1 | - $CE_1$<br />- $CE_5$<br />- $CE_6$ |
-| $TC_5$    | 620111    | Nome1   | `vuoto`  | - $CE_1$<br />- $CE_4$<br />- $CE_7$ |
+| Test case | Matricola | Nome    | Cognome  | Classi coperte                             |
+| --------- | --------- | ------- | -------- | ------------------------------------------ |
+| $TC_1$    | 620111    | Nome1   | Cognome1 | - $CE_1$<br />- $CE_4$<br />- $CE_6$       |
+| $TC_2$    | `vuoto`   | Nome1   | Cognome1 | - $CE_2$<br />- $CE_4$<br />- $CE_6$       |
+| $TC_3$    | 620001    | Nome1   | Cognome1 | - $CE_3$<br />- $CE_4$<br />- $CE_6$<br /> |
+| $TC_4$    | 620111    | `vuoto` | Cognome1 | - $CE_1$<br />- $CE_5$<br />- $CE_6$       |
+| $TC_5$    | 620111    | Nome1   | `vuoto`  | - $CE_1$<br />- $CE_4$<br />- $CE_7$       |
 
 ---
 
-### Agiunta gruppo
+### Aggiunta gruppo
 
 #### Classi di equivalenza
 
-| Condizione         | Valide                     | Non valide                                                   |
-| ------------------ | -------------------------- | ------------------------------------------------------------ |
-| Nome gruppo        | - $CE_1$ nome non presente | - $CE_2$ campo vuoto<br />- $CE_3$ nome presente             |
-| Selezione studenti | - $CE_4$ tutti liberi      | - $CE_5$ nessuna selezione<br />- $CE_6$ almeno uno impegnato |
-|                    |                            |                                                              |
+| Condizione         | Valide                                                       | Non valide                                                   |
+| ------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Nome gruppo        | - $CE_1$ campo non vuoto e nome non presente                 | - $CE_2$ campo vuoto<br />- $CE_3$ nome presente             |
+| Selezione studenti | - $CE_4$ studenti presenti e non appartenenti a nessun gruppo | - $CE_5$ nessuna selezione<br />- $CE_6$ almeno uno già membro di un gruppo<br />- $CE_7$ almeno uno non è presente |
 
 #### Test case
 
-| Test case | Nome gruppo | Selezione Studenti   | Classi coperte         |
-| --------- | ----------- | -------------------- | ---------------------- |
-| $TC_1$    | Gruppo_1000 | tutti liberi         | - $CE_1$<br />- $CE_4$ |
-| $TC_2$    | Gruppo_1000 | nessuna selezione    | - $CE_1$<br />- $CE_5$ |
-| $TC_3$    | Gruppo_1000 | almeno uno impegnato | - $CE_1$<br />- $CE_6$ |
-| $TC_4$    | `vuoto`     | tutti liberi         | - $CE_4$<br />- $CE_2$ |
-| $TC_5$    | Gruppo1     | tutti liberi         | - $CE_4$<br />- $CE_3$ |
+| Test case | Nome gruppo | Selezione Studenti                        | Classi coperte         |
+| --------- | ----------- | ----------------------------------------- | ---------------------- |
+| $TC_1$    | Gruppo_1000 | studenti non appartenenti a nessun gruppo | - $CE_1$<br />- $CE_4$ |
+| $TC_2$    | Gruppo_1000 | nessuna selezione                         | - $CE_1$<br />- $CE_5$ |
+| $TC_3$    | Gruppo_1000 | almeno uno già membro di un gruppo        | - $CE_1$<br />- $CE_6$ |
+| $TC_4$    | `vuoto`     | studenti non appartenenti a nessun gruppo | - $CE_2$<br />- $CE_4$ |
+| $TC_5$    | Gruppo1     | studenti non appartenenti a nessun gruppo | - $CE_3$<br />- $CE_4$ |
+| $TC_6$    | Gruppo_1000 | almeno uno studente non è presente        | - $CE_1$<br />- $CE_7$ |
 
 ---
 
@@ -554,9 +590,8 @@ Di seguito è riportato lo schema completo del database.
 
 | Condizione | Valide                   | Non valide           |
 | ---------- | ------------------------ | -------------------- |
-| Titolo     | - $CE_1$ titolo inserito | - $CE_2$ campo vuoto |
-| Body       | - $CE_3$ body inserito   | - $CE_4$ campo vuoto |
-|            |                          |                      |
+| Titolo     | - $CE_1$ campo non vuoto | - $CE_2$ campo vuoto |
+| Body       | - $CE_3$ campo non vuoto | - $CE_4$ campo vuoto |
 
 #### Test case
 
@@ -570,22 +605,25 @@ Di seguito è riportato lo schema completo del database.
 
 ### Assegnazione work track
 
-| Condizione           | Valide                         | Non valide                                                   |
-| -------------------- | ------------------------------ | ------------------------------------------------------------ |
-| Selezione gruppo     | - $CE_1$ solo un gruppo libero | - $CE_2$ selezione vuota<br />- $CE_3$ selezione multipla<br />- $CE_4$ gruppo impegnato |
-| Selezione work track | - $CE_5$ solo una work track   | - $CE_6$ selezione vuota<br />- $CE_7$ selezione multipla    |
-|                      |                                |                                                              |
+#### Classi di equivalenza
+
+| Condizione           | Valide                                              | Non valide                                                   |
+| -------------------- | --------------------------------------------------- | ------------------------------------------------------------ |
+| Selezione gruppo     | - $CE_1$ solo un gruppo presente e senza work track | - $CE_2$ selezione vuota<br />- $CE_3$ selezione multipla<br />- $CE_4$ gruppo con work track<br />- $CE_5$ gruppo non presente |
+| Selezione work track | - $CE_6$ solo una work track presente               | - $CE_7$ selezione vuota<br />- $CE_8$ selezione multipla<br />- $CE_9$ work track non presente |
 
 #### Test case
 
-| Test case | Selezione gruppo      | Selezione work track | Classi coperte         |
-| --------- | --------------------- | -------------------- | ---------------------- |
-| $TC_1$    | un solo gruppo libero | una sola work track  | - $CE_1$<br />- $CE_5$ |
-| $TC_2$    | un solo gruppo libero | selezione vuota      | - $CE_1$<br />- $CE_6$ |
-| $TC_3$    | un solo gruppo libero | selezione multipla   | - $CE_1$<br />- $CE_7$ |
-| $TC_4$    | selezione vuota       | una sola work track  | - $CE_5$<br />- $CE_2$ |
-| $TC_5$    | selezione multipla    | una sola work track  | - $CE_5$<br />- $CE_3$ |
-| $TC_6$    | gruppo impegnato      | una sola work track  | - $CE_5$<br />- $CE_4$ |
+| Test case | Selezione gruppo                | Selezione work track    | Classi coperte         |
+| --------- | ------------------------------- | ----------------------- | ---------------------- |
+| $TC_1$    | un solo gruppo senza work track | una sola work track     | - $CE_1$<br />- $CE_6$ |
+| $TC_2$    | un solo gruppo senza work track | selezione vuota         | - $CE_1$<br />- $CE_7$ |
+| $TC_3$    | un solo gruppo senza work track | selezione multipla      | - $CE_1$<br />- $CE_8$ |
+| $TC_4$    | selezione vuota                 | una sola work track     | - $CE_2$<br />- $CE_6$ |
+| $TC_5$    | selezione multipla              | una sola work track     | - $CE_3$<br />- $CE_6$ |
+| $TC_6$    | gruppo con work track           | una sola work track     | - $CE_4$<br />- $CE_6$ |
+| $TC_7$    | gruppo non presente             | una sola work track     | - $CE_5$<br />- $CE_6$ |
+| $TC_8$    | un solo gruppo senza work track | work track non presente | - $CE_1$<br />- $CE_9$ |
 
 ---
 
@@ -593,20 +631,20 @@ Di seguito è riportato lo schema completo del database.
 
 #### Classi di equivalenza
 
-| Condizione | Valide                                               | Non valide                                                   |
-| ---------- | ---------------------------------------------------- | ------------------------------------------------------------ |
-| Gruppo     | - $CE_1$ gruppo con work track con meno di 5 meeting | - $CE_2$ gruppo senza work track<br />- $CE_3$ gruppo con gia 5 meeting |
-| Data       | - $CE_4$ formato valido                              | - $CE_5$ formato non valido                                  |
-|            |                                                      |                                                              |
+| Condizione | Valide                                                       | Non valide                                                   |
+| ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Gruppo     | - $CE_1$ gruppo presente con work track con meno di 5 meeting | - $CE_2$ gruppo senza work track<br />- $CE_3$ gruppo con già 5 meeting<br />- $CE_4$ gruppo non presente |
+| Data       | - $CE_5$ formato valido                                      | - $CE_6$ formato non valido                                  |
 
 #### Test case
 
 | Test case | Gruppo                                    | Data               | Classi coperte         |
 | --------- | ----------------------------------------- | ------------------ | ---------------------- |
-| $TC_1$    | gruppo con work track e meno di 5 meeting | formato valido     | - $CE_1$<br />- $CE_4$ |
-| $TC_2$    | gruppo con work track e meno di 5 meeting | formato non valido | - $CE_1$<br />- $CE_5$ |
-| $TC_3$    | gruppo senza work track                   | formato valido     | - $CE_4$<br />- $CE_2$ |
-| $TC_4$    | gruppo con già 5 meeting                  | formato valido     | - $CE_4$<br />- $CE_3$ |
+| $TC_1$    | gruppo con work track e meno di 5 meeting | formato valido     | - $CE_1$<br />- $CE_5$ |
+| $TC_2$    | gruppo con work track e meno di 5 meeting | formato non valido | - $CE_1$<br />- $CE_6$ |
+| $TC_3$    | gruppo senza work track                   | formato valido     | - $CE_2$<br />- $CE_5$ |
+| $TC_4$    | gruppo con già 5 meeting                  | formato valido     | - $CE_3$<br />- $CE_5$ |
+| $TC_5$    | gruppo non presente                       | formato valido     | - $CE_4$<br />- $CE_5$ |
 
 ---
 
@@ -616,27 +654,28 @@ Di seguito è riportato lo schema completo del database.
 
 | Condizione | Valide                                                       | Non valide                                                   |
 | ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Meeting    | - $CE_1$ meeting senza review                                | - $CE_2$ selezione vuota<br />- $CE_3$ selezione multipla<br />- $CE_4$ meeting con review |
-| Title      | - $CE_5$ campo non vuoto                                     | - $CE_6$ campo vuoto                                         |
-| Body       | - $CE_7$ campo non vuoto                                     | - $CE_8$ campo vuoto                                         |
-| Rating     | - $CE_9$ numero compreso tra 1 e 30<br />- $CE_{13}$ campo vuoto | - $CE_{10}$ nan<br />- $CE_{11}$ < 1<br />- $CE_{12}$ > 30   |
+| Meeting    | - $CE_1$ meeting presente senza review                       | - $CE_2$ selezione vuota<br />- $CE_3$ selezione multipla<br />- $CE_4$ meeting con review<br />- $CE_5$ meeting non presente |
+| Title      | - $CE_6$ campo non vuoto                                     | - $CE_7$ campo vuoto                                         |
+| Body       | - $CE_8$ campo non vuoto                                     | - $CE_9$ campo vuoto                                         |
+| Rating     | - $CE_{10}$ campo non vuoto e numero compreso tra 1 e 30<br />- $CE_{11}$ campo vuoto | - $CE_{12}$ nan<br />- $CE_{13}$ < 1<br />- $CE_{14}$ > 30   |
 
 #### Test case
 
-| Test case | Meeting              | Title   | Body    | Rating  | Classi coperte                                        |
-| --------- | -------------------- | ------- | ------- | ------- | ----------------------------------------------------- |
-| $TC_1$    | meeting senza review | Title   | Body    | `vuoto` | - $CE_1$<br />- $CE_5$<br />- $CE_7$<br />- $CE_{13}$ |
-| $TC_1$    | meeting senza review | Title   | Body    | 18      | - $CE_1$<br />- $CE_5$<br />- $CE_7$<br />- $CE_9$    |
-| $TC_3$    | meeting senza review | `vuoto` | Body    | 30      | - $CE_1$<br />- $CE_6$<br />- $CE_7$<br />- $CE_9$    |
-| $TC_4$    | meeting senza review | Title   | `vuoto` | 1       | - $CE_1$<br />- $CE_ 5$<br />- $CE_8$<br />- $CE_9$   |
-| $TC_5$    | meeting senza review | Title   | Body    | nan     | - $CE_1$<br />- $CE_5$<br />- $CE_7$<br />- $CE_{10}$ |
-| $TC_6$    | meeting senza review | Title   | Body    | 0       | - $CE_1$<br />- $CE_5$<br />- $CE_7$<br />- $CE_{11}$ |
-| $TC_7$    | meeting senza review | Title   | Body    | 31      | - $CE_1$<br />- $CE_5$<br />- $CE_7$<br />- $CE_{12}$ |
-| $TC_8$    | `vuota`              | Title   | Body    | `vuoto` | - $CE_2$<br />- $CE_5$<br />- $CE_7$<br />- $CE_{13}$ |
-| $TC_9$    | multipla             | Title   | Body    | `vuoto` | - $CE_3$<br />- $CE_5$<br />- $CE_7$<br />- $CE_{13}$ |
-| $TC_{10}$ | meeting con review   | Title   | Body    | `vuoto` | - $CE_4$<br />- $CE_5$<br />- $CE_7$<br />- $CE_{13}$ |
-| $TC_{11}$ | meeting senza review | `vuoto` | Body    | `vuoto` | - $CE_1$<br />- $CE_6$<br />- $CE_7$<br />- $CE_{13}$ |
-| $TC_{12}$ | meeting senza review | Title   | `vuoto` | `vuoto` | - $CE_1$<br />- $CE_5$<br />- $CE_8$<br />- $CE_{13}$ |
+| Test case | Meeting              | Title   | Body    | Rating  | Classi coperte                                         |
+| --------- | -------------------- | ------- | ------- | ------- | ------------------------------------------------------ |
+| $TC_1$    | meeting senza review | Title   | Body    | `vuoto` | - $CE_1$<br />- $CE_6$<br />- $CE_8$<br />- $CE_{11}$  |
+| $TC_1$    | meeting senza review | Title   | Body    | 18      | - $CE_1$<br />- $CE_6$<br />- $CE_8$<br />- $CE_{10}$  |
+| $TC_3$    | meeting senza review | `vuoto` | Body    | 30      | - $CE_1$<br />- $CE_7$<br />- $CE_8$<br />- $CE_{10}$  |
+| $TC_4$    | meeting senza review | Title   | `vuoto` | 1       | - $CE_1$<br />- $CE_ 6$<br />- $CE_9$<br />- $CE_{10}$ |
+| $TC_5$    | meeting senza review | Title   | Body    | nan     | - $CE_1$<br />- $CE_6$<br />- $CE_8$<br />- $CE_{12}$  |
+| $TC_6$    | meeting senza review | Title   | Body    | 0       | - $CE_1$<br />- $CE_6$<br />- $CE_8$<br />- $CE_{13}$  |
+| $TC_7$    | meeting senza review | Title   | Body    | 31      | - $CE_1$<br />- $CE_6$<br />- $CE_8$<br />- $CE_{14}$  |
+| $TC_8$    | selezione vuota      | Title   | Body    | `vuoto` | - $CE_2$<br />- $CE_6$<br />- $CE_8$<br />- $CE_{11}$  |
+| $TC_9$    | selezione multipla   | Title   | Body    | `vuoto` | - $CE_3$<br />- $CE_6$<br />- $CE_8​$<br />- $CE_{11}​$  |
+| $TC_{10}$ | meeting con review   | Title   | Body    | `vuoto` | - $CE_4$<br />- $CE_6$<br />- $CE_8$<br />- $CE_{11}$  |
+| $TC_{11}$ | meeting non presente | Title   | Body    | `vuoto` | - $CE_5$<br />- $CE_6$<br />- $CE_8$<br />- $CE_{11}$  |
+| $TC_{12}$ | meeting senza review | `vuoto` | Body    | `vuoto` | - $CE_1$<br />- $CE_7$<br />- $CE_8$<br />- $CE_{11}$  |
+| $TC_{13}$ | meeting senza review | Title   | `vuoto` | `vuoto` | - $CE_1$<br />- $CE_6$<br />- $CE_9$<br />- $CE_{11}$  |
 
 
 
