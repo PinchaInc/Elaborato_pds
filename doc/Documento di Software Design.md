@@ -331,11 +331,31 @@ Nel sub-package `swing` è contenuta l'implementazione delle *views* con la libr
 
 Di seguito è riportato un DCD completo del sistema e alcuni sequence e activity diagram.
 
+---
+
 ![dcd][dcd]
+
+---
 
 ![sd1][sd1]
 
+---
+
 ![sd2][sd2]
+
+---
+
+![sd4][]
+
+![sd4.1][]
+
+![sd4.2][]
+
+![sd4.3][]
+
+![sd4.4][]
+
+
 
 ![sd3][sd3]
 
@@ -488,15 +508,15 @@ $$
 $$
 
 $$
-\text{Group} \equiv \{\underline{name} \text{, } \underline{course\_name} \text{, } \underline{course\_year} \text{, worktrack}\}
+\text{Group} \equiv \{\underline{\text{name}} \text{, } {\color{red}\underline{course\_name} \text{, } \underline{course\_year}} \text{, worktrack}\}
 $$
 
 $$
-\text{Meeting} \equiv \{\text{owner, } \underline{group} \text{, } \underline{id} \text{, start, end} \}
+\text{Meeting} \equiv \{\text{owner, } {\color{red}\underline{group}} \text{, } \underline{id} \text{, start, end} \}
 $$
 
 $$
-\text{Review} \equiv \{ \underline{group} \text{, } \underline{id} \text{, title, body, type, rating} \}
+\text{Review} \equiv \{ {\color{red}\underline{group} \text{, } \underline{id}} \text{, title, body, type, rating} \}
 $$
 
 $$
@@ -508,7 +528,7 @@ $$
 $$
 
 $$
-\text{WorkTrack} \equiv \{ \underline{id} \text{, } \underline{course\_name} \text{, } \underline{course\_year} \text{, title, body} \}
+\text{WorkTrack} \equiv \{ \underline{id} \text{, } {\color{red}\underline{course\_name} \text{, } \underline{course\_year}} \text{, title, body} \}
 $$
 
 Di seguito è riportato lo schema completo del database.
@@ -698,6 +718,13 @@ Di seguito è riportato lo schema completo del database.
 [ad2]: img/ad2.png
 [ad3]: img/ad3.png
 [ad4]: img/ad4.png
+[sd4]: img/sd4.png
+[sd4.1]: img/sd4.1.png
+[sd4.2]: img/sd4.2.png
+[sd4.3]: img/sd4.3.png
+[sd4.4]: img/sd4.4.png
+
+
 
 
 
