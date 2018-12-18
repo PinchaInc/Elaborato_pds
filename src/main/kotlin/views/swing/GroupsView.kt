@@ -169,8 +169,10 @@ class GroupsView : views.GroupsView {
         setTrack.addActionListener {
             val selectedGroups = groupsJTable.selectedRows
             val selectedTracks = tracksJTable.selectedRows
-            if (selectedGroups.size != 1 || selectedTracks.size != 1)
-                showMessage("error", MessageType.ERROR)
+            if (selectedTracks.size != 1)
+                showMessage("Selezionare una e una sola traccia", MessageType.ERROR)
+            else if (selectedGroups.size != 1)
+                showMessage("Selezionare uno e un solo gruppo", MessageType.ERROR)
             else
                 controller.assignWork(selectedGroups[0], selectedTracks[0])
         }
@@ -185,7 +187,7 @@ class GroupsView : views.GroupsView {
                     val date = simpleDateFormat.parse(dateFiled.text)
                     controller.addMeeting(selectedGroups[0], date, date)
                 } catch (e: Exception) {
-                    showMessage("error", MessageType.ERROR)
+                    showMessage("Inserire la data nel formato corretto", MessageType.ERROR)
                 }
             }
         }

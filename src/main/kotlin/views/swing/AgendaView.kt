@@ -217,7 +217,7 @@ class AgendaView : AgendaView {
         addReview.addActionListener {
             val selectedRows = meetingsJTable.selectedRows
             if (selectedRows.size != 1)
-                showMessage("error", MessageType.ERROR)
+                showMessage("Selezionare uno e solo un meeting", MessageType.ERROR)
             else {
                 val pos = model.getMeetings().indexOf(filterMeetings(model.getMeetings())[selectedRows[0]])
                 if (ratingField.text.isBlank())
@@ -227,7 +227,7 @@ class AgendaView : AgendaView {
                         val rating = ratingField.text.toInt()
                         controller.addReview(pos, titleField.text, bodyField.text, rating)
                     } catch (e: Exception) {
-                        showMessage("error", MessageType.ERROR)
+                        showMessage("Il rating deve essere in formato numerico", MessageType.ERROR)
                     }
                 }
             }

@@ -76,7 +76,7 @@ class LoginView : LoginView {
             try {
                 controller.authenticate(username.text.toInt(), password.text)
             } catch (e: Exception) {
-                showMessage("error", MessageType.ERROR)
+                showMessage("Username errato", MessageType.ERROR)
             }
         }
     }

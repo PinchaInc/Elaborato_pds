@@ -31,12 +31,12 @@ class ConcreteLoginController(
         else {
             val account = model.getAccount(username)
             if (account == null || !account.authenticate(password))
-                view.showMessage("Error", MessageType.ERROR)
+                view.showMessage("Username o password errati", MessageType.ERROR)
             else {
                 if (model.loadUser(username))
                     application.startStudents()
                 else
-                    view.showMessage("error", MessageType.ERROR)
+                    view.showMessage("Non è stato possibile recuperare le informazioni dal database", MessageType.ERROR)
             }
         }
     }

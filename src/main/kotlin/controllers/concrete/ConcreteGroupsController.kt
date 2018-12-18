@@ -34,7 +34,7 @@ class ConcreteGroupsController(
             if (model.createWork(group, workTrack))
                 view.showMessage("Work track aggiunto con successo")
             else
-                view.showMessage("Non è stato possibile assegnare la traccia al gruppo", MessageType.ERROR)
+                view.showMessage("Selezionare un gruppo senza work track", MessageType.ERROR)
         } else
             view.showMessage("Si è verificato un errore, riprovare più tardi", MessageType.ERROR)
     }
@@ -62,7 +62,7 @@ class ConcreteGroupsController(
             if (model.addWorkTrack(WorkTrack(title, body)))
                 view.showMessage("Work track aggiunta con successo")
             else
-                view.showMessage("Non è stato possibile aggiungere la traccia, riprovare più tardi", MessageType.ERROR)
+                view.showMessage("Titolo già presente", MessageType.ERROR)
         }
     }
 }

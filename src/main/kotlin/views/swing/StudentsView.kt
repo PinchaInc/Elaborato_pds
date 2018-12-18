@@ -176,7 +176,10 @@ class StudentsView : StudentsView {
 
     override fun update(p0: Observable?, p1: Any?) {
         when (p1) {
-            is Student -> populateTable(p1)
+            is Student -> {
+                tableModel.rowCount = 0
+                populateTable(*(p0 as Model).getStudents())
+            }
 
             is Group -> {
                 tableModel.rowCount = 0

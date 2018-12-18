@@ -33,13 +33,15 @@ class ConcreteStudentsController(
             if (model.addStudent(student))
                 view.showMessage("ok")
             else
-                view.showMessage("error", MessageType.ERROR)
+                view.showMessage("Matricola già assegnata", MessageType.ERROR)
         }
     }
 
     override fun addGroup(groupName: String, vararg studentsID: Int) {
-        if (studentsID.isEmpty() || groupName.isBlank())
-            view.showMessage("Compilare tutti i campi", MessageType.ERROR)
+        if (groupName.isBlank())
+            view.showMessage("Inserire il nome del gruppo", MessageType.ERROR)
+        else if (studentsID.isEmpty())
+            view.showMessage("Selezionare uno o più studenti", MessageType.ERROR)
         else {
             val students = studentsID.map { model.getStudent(it) }
             if (students.none { it == null }) {
@@ -47,10 +49,12 @@ class ConcreteStudentsController(
                 if (group != null) {
                     if (model.addGroup(group))
                         view.showMessage("OK")
-                    else
-                        view.showMessage("Errore aggiunta gruppo", MessageType.ERROR)
+                    else{
+                        group.clear()
+                        view.showMessage("Nome già utilizzato da un altro gruppo", MessageType.ERROR)
+                    }
                 } else
-                    view.showMessage("Errore creazione gruppo", MessageType.ERROR)
+                    view.showMessage("Uno o più studenti fanno già parte di un gruppo", MessageType.ERROR)
             } else
                 view.showMessage("Studenti non validi", MessageType.ERROR)
         }

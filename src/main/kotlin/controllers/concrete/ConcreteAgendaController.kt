@@ -7,6 +7,7 @@ import model.FinalReview
 import model.Model
 import model.Review
 import views.AgendaView
+import java.util.Date
 
 class ConcreteAgendaController(
     private val view: AgendaView,
@@ -31,16 +32,24 @@ class ConcreteAgendaController(
         else {
             val meeting = model.getMeeting(meetingID)
             if (meeting != null) {
-                val review = if (reviewRating == null)
-                    Review(reviewTitle, reviewBody)
-                else FinalReview.makeFinalReview(reviewTitle, reviewBody, reviewRating)
-                if (review == null)
-                    view.showMessage("Il voto deve essere compreso tra 1 e 30", MessageType.ERROR)
+                if (meeting.start.after(Date()))
+                    view.showMessage("Non puoi assegnare una review ad un meeting futuro", MessageType.ERROR)
                 else {
-                    if (model.addReview(meeting, review))
-                        view.showMessage("Review aggiunta con successo")
-                    else
-                        view.showMessage("Non è stato possibile aggiungere la review, riprovare più tardi", MessageType.ERROR)
+                    if (meeting.review != null)
+                        view.showMessage("Il meeting ha già una review", MessageType.ERROR)
+                    else {
+                        val review = if (reviewRating == null)
+                            Review(reviewTitle, reviewBody)
+                        else FinalReview.makeFinalReview(reviewTitle, reviewBody, reviewRating)
+                        if (review == null)
+                            view.showMessage("Il voto deve essere compreso tra 1 e 30", MessageType.ERROR)
+                        else {
+                            if (model.addReview(meeting, review))
+                                view.showMessage("Review aggiunta con successo")
+                            else
+                                view.showMessage("Si è verificato qualche errore, riprovare più tardi", MessageType.ERROR)
+                        }
+                    }
                 }
             } else
                 view.showMessage("Non è stato possibile trovare il meeting, riprovare più tradi", MessageType.ERROR)
