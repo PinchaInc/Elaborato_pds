@@ -616,10 +616,10 @@ Di seguito è riportato lo schema grafico del database.
 
 #### Classi di equivalenza
 
-| Condizione | Valide                   | Non valide           |
-| ---------- | ------------------------ | -------------------- |
-| Titolo     | - $CE_1$ campo non vuoto | - $CE_2$ campo vuoto |
-| Body       | - $CE_3$ campo non vuoto | - $CE_4$ campo vuoto |
+| Condizione | Valide                             | Non valide                                            |
+| ---------- | ---------------------------------- | ----------------------------------------------------- |
+| Titolo     | - $CE_1$ titolo inserito e univoco | - $CE_2$ campo vuoto<br />- $CE_5$ titolo non univoco |
+| Body       | - $CE_3$ body inserito             | - $CE_4$ campo vuoto                                  |
 
 #### Test case
 
@@ -628,6 +628,7 @@ Di seguito è riportato lo schema grafico del database.
 | $TC_1$    | Title   | Body    | - $CE_1$<br />- $CE_3$ |
 | $TC_2$    | `vuoto` | Body    | - $CE_2$<br />- $CE_3$ |
 | $TC_3$    | Title   | `vuoto` | - $CE_1$<br />- $CE_4$ |
+| $TC_4$    | Title1  | Body    | - $CE_5$<br />- $CE_3$ |
 
 ---
 
