@@ -683,28 +683,29 @@ Di seguito è riportato lo schema grafico del database.
 
 | Condizione | Valide                                                       | Non valide                                                   |
 | ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Meeting    | - $CE_1$ meeting presente senza review                       | - $CE_2$ selezione vuota<br />- $CE_3$ selezione multipla<br />- $CE_4$ meeting con review<br />- $CE_5$ meeting non presente |
+| Meeting    | - $CE_1$ meeting presente, con data precedente a quella odierna, senza review | - $CE_2$ selezione vuota<br />- $CE_3$ selezione multipla<br />- $CE_4$ meeting con review<br />- $CE_5$ meeting non presente<br />- $CE_{15}$ meeting con data successiva a quella odierna |
 | Title      | - $CE_6$ campo non vuoto                                     | - $CE_7$ campo vuoto                                         |
 | Body       | - $CE_8$ campo non vuoto                                     | - $CE_9$ campo vuoto                                         |
 | Rating     | - $CE_{10}$ campo non vuoto e numero compreso tra 1 e 30<br />- $CE_{11}$ campo vuoto | - $CE_{12}$ nan<br />- $CE_{13}$ < 1<br />- $CE_{14}$ > 30   |
 
 #### Test case
 
-| Test case | Meeting              | Title   | Body    | Rating  | Classi coperte                                         |
-| --------- | -------------------- | ------- | ------- | ------- | ------------------------------------------------------ |
-| $TC_1$    | meeting senza review | Title   | Body    | `vuoto` | - $CE_1$<br />- $CE_6$<br />- $CE_8$<br />- $CE_{11}$  |
-| $TC_1$    | meeting senza review | Title   | Body    | 18      | - $CE_1$<br />- $CE_6$<br />- $CE_8$<br />- $CE_{10}$  |
-| $TC_3$    | meeting senza review | `vuoto` | Body    | 30      | - $CE_1$<br />- $CE_7$<br />- $CE_8$<br />- $CE_{10}$  |
-| $TC_4$    | meeting senza review | Title   | `vuoto` | 1       | - $CE_1$<br />- $CE_ 6$<br />- $CE_9$<br />- $CE_{10}$ |
-| $TC_5$    | meeting senza review | Title   | Body    | nan     | - $CE_1$<br />- $CE_6$<br />- $CE_8$<br />- $CE_{12}$  |
-| $TC_6$    | meeting senza review | Title   | Body    | 0       | - $CE_1$<br />- $CE_6$<br />- $CE_8$<br />- $CE_{13}$  |
-| $TC_7$    | meeting senza review | Title   | Body    | 31      | - $CE_1$<br />- $CE_6$<br />- $CE_8$<br />- $CE_{14}$  |
-| $TC_8$    | selezione vuota      | Title   | Body    | `vuoto` | - $CE_2$<br />- $CE_6$<br />- $CE_8$<br />- $CE_{11}$  |
-| $TC_9$    | selezione multipla   | Title   | Body    | `vuoto` | - $CE_3$<br />- $CE_6$<br />- $CE_8​$<br />- $CE_{11}​$  |
-| $TC_{10}$ | meeting con review   | Title   | Body    | `vuoto` | - $CE_4$<br />- $CE_6$<br />- $CE_8$<br />- $CE_{11}$  |
-| $TC_{11}$ | meeting non presente | Title   | Body    | `vuoto` | - $CE_5$<br />- $CE_6$<br />- $CE_8$<br />- $CE_{11}$  |
-| $TC_{12}$ | meeting senza review | `vuoto` | Body    | `vuoto` | - $CE_1$<br />- $CE_7$<br />- $CE_8$<br />- $CE_{11}$  |
-| $TC_{13}$ | meeting senza review | Title   | `vuoto` | `vuoto` | - $CE_1$<br />- $CE_6$<br />- $CE_9$<br />- $CE_{11}$  |
+| Test case | Meeting                                      | Title   | Body    | Rating  | Classi coperte                                           |
+| --------- | -------------------------------------------- | ------- | ------- | ------- | -------------------------------------------------------- |
+| $TC_1$    | meeting senza review                         | Title   | Body    | `vuoto` | - $CE_1$<br />- $CE_6$<br />- $CE_8$<br />- $CE_{11}$    |
+| $TC_1$    | meeting senza review                         | Title   | Body    | 18      | - $CE_1$<br />- $CE_6$<br />- $CE_8$<br />- $CE_{10}$    |
+| $TC_3$    | meeting senza review                         | `vuoto` | Body    | 30      | - $CE_1$<br />- $CE_7$<br />- $CE_8$<br />- $CE_{10}$    |
+| $TC_4$    | meeting senza review                         | Title   | `vuoto` | 1       | - $CE_1$<br />- $CE_ 6$<br />- $CE_9$<br />- $CE_{10}$   |
+| $TC_5$    | meeting senza review                         | Title   | Body    | nan     | - $CE_1$<br />- $CE_6$<br />- $CE_8$<br />- $CE_{12}$    |
+| $TC_6$    | meeting senza review                         | Title   | Body    | 0       | - $CE_1$<br />- $CE_6$<br />- $CE_8$<br />- $CE_{13}$    |
+| $TC_7$    | meeting senza review                         | Title   | Body    | 31      | - $CE_1$<br />- $CE_6$<br />- $CE_8$<br />- $CE_{14}$    |
+| $TC_8$    | selezione vuota                              | Title   | Body    | `vuoto` | - $CE_2$<br />- $CE_6$<br />- $CE_8$<br />- $CE_{11}$    |
+| $TC_9$    | selezione multipla                           | Title   | Body    | `vuoto` | - $CE_3$<br />- $CE_6$<br />- $CE_8$<br />- $CE_{11}​$    |
+| $TC_{10}$ | meeting con review                           | Title   | Body    | `vuoto` | - $CE_4$<br />- $CE_6$<br />- $CE_8$<br />- $CE_{11}$    |
+| $TC_{11}$ | meeting non presente                         | Title   | Body    | `vuoto` | - $CE_5$<br />- $CE_6$<br />- $CE_8$<br />- $CE_{11}$    |
+| $TC_{12}$ | meeting senza review                         | `vuoto` | Body    | `vuoto` | - $CE_1$<br />- $CE_7$<br />- $CE_8$<br />- $CE_{11}$    |
+| $TC_{13}$ | meeting senza review                         | Title   | `vuoto` | `vuoto` | - $CE_1$<br />- $CE_6$<br />- $CE_9$<br />- $CE_{11}$    |
+| $TC_{14}$ | meeting con data successiva a quella odierna | Title   | Body    | `vuoto` | - $CE_{15}$<br />- $CE_6$<br />- $CE_8$<br />- $CE_{11}$ |
 
 
 
