@@ -20,7 +20,7 @@ class Group(var name: String, vararg students: Student) {
 
     fun addMeeting(meeting: Meeting): Boolean {
         return if (meetings.none { it.id == meeting.id && it.group.name == meeting.group.name }
-            && meetingCount < 4) {
+            && meetingCount < 5) {
             meetings.add(meeting)
             true
         } else
@@ -44,6 +44,10 @@ class Group(var name: String, vararg students: Student) {
     fun increaseMeeting(): Int {
         meetingCount++
         return meetingCount
+    }
+
+    fun clear() {
+        members.forEach { it.group = null }
     }
 
     companion object {
