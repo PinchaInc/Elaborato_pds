@@ -48,37 +48,64 @@ class GroupsView : views.GroupsView {
             val bodyJPanel = JPanel()
             bodyJPanel {
 
-                val groupsTableJPanel = JPanel()
-                groupsTableJPanel {
+                val tablesJPanel = JPanel()
+                tablesJPanel {
 
-                    val columbNameJPanel = JPanel()
-                    columbNameJPanel {
+                    val groupsTableTitleJPanel = JPanel()
+                    groupsTableTitleJPanel {
 
-                        layout = GridLayout(1, 2)
-                        add(JLabel("Group Name"))
-                        add(JLabel("Work Track"))
+                        val groupsTableJPanel = JPanel()
+                        groupsTableJPanel {
+
+                            val columbNameJPanel = JPanel()
+                            columbNameJPanel {
+
+                                layout = GridLayout(1, 2)
+                                add(JLabel("Group Name"))
+                                add(JLabel("Work Track"))
+                            }
+
+                            layout = BorderLayout()
+                            add(columbNameJPanel, BorderLayout.NORTH)
+                            add(groupsJTable, BorderLayout.CENTER)
+                        }
+
+                        layout = BorderLayout()
+                        add(JLabel("Tabbella studenti"), BorderLayout.NORTH)
+                        add(groupsTableJPanel)
                     }
 
-                    layout = BorderLayout()
-                    add(columbNameJPanel, BorderLayout.NORTH)
-                    add(groupsJTable, BorderLayout.CENTER)
-                }
 
-                val trackTableJPanel = JPanel()
-                trackTableJPanel {
+                    val trackTableTitleJPanel = JPanel()
+                    trackTableTitleJPanel {
 
-                    val columNameJPanel = JPanel()
-                    columNameJPanel {
+                        val trackTableJPanel = JPanel()
+                        trackTableJPanel {
 
-                        layout = GridLayout(1, 2)
-                        add(JLabel("Title"))
-                        add(JLabel("Body"))
+                            val columNameJPanel = JPanel()
+                            columNameJPanel {
+
+                                layout = GridLayout(1, 2)
+                                add(JLabel("Title"))
+                                add(JLabel("Body"))
+                            }
+
+                            layout = BorderLayout()
+                            add(columNameJPanel, BorderLayout.NORTH)
+                            add(tracksJTable, BorderLayout.CENTER)
+                        }
+
+                        layout = BorderLayout()
+                        add(JLabel("Tabbella work track"), BorderLayout.NORTH)
+                        add(trackTableJPanel, BorderLayout.CENTER)
                     }
 
-                    layout = BorderLayout()
-                    add(columNameJPanel, BorderLayout.NORTH)
-                    add(tracksJTable, BorderLayout.CENTER)
+
+                    layout = GridLayout(2, 1)
+                    add(groupsTableTitleJPanel)
+                    add(trackTableTitleJPanel)
                 }
+
 
                 val controllJPanel = JPanel()
                 controllJPanel {
@@ -93,14 +120,21 @@ class GroupsView : views.GroupsView {
                             titleJPanel {
 
                                 layout = BorderLayout()
-                                add(JLabel("Title"), BorderLayout.WEST)
+                                add(JLabel("Title"), BorderLayout.NORTH)
                                 add(titleField, BorderLayout.CENTER)
                             }
 
-                            layout = GridLayout(3, 1)
-                            add(titleJPanel)
-                            add(JLabel("Body"))
-                            add(bodyField)
+                            val trackBodyJPanel = JPanel()
+                            trackBodyJPanel {
+
+                                layout = BorderLayout()
+                                add(JLabel("Body"), BorderLayout.NORTH)
+                                add(bodyField, BorderLayout.CENTER)
+                            }
+
+                            layout = BorderLayout()
+                            add(titleJPanel, BorderLayout.NORTH)
+                            add(trackBodyJPanel, BorderLayout.SOUTH)
                         }
 
 
@@ -124,7 +158,7 @@ class GroupsView : views.GroupsView {
                             }
 
                             layout = BorderLayout()
-                            add(dateJPanel, BorderLayout.CENTER)
+                            add(dateJPanel, BorderLayout.NORTH)
                             add(addMeeting, BorderLayout.SOUTH)
                         }
 
@@ -134,14 +168,13 @@ class GroupsView : views.GroupsView {
                     }
 
 
-                    layout = GridLayout(1, 2)
-                    add(addTrackJPanel)
+                    layout = GridLayout(2, 1)
                     add(meetingAndTrackeJPanel)
+                    add(addTrackJPanel)
                 }
 
-                layout = GridLayout(1, 3)
-                add(groupsTableJPanel)
-                add(trackTableJPanel)
+                layout = GridLayout(1, 2)
+                add(tablesJPanel)
                 add(controllJPanel)
             }
 
