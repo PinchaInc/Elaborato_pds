@@ -17,6 +17,7 @@ import java.util.Observable
 import javax.swing.JButton
 import javax.swing.JLabel
 import javax.swing.JPanel
+import javax.swing.JScrollPane
 import javax.swing.JTable
 import javax.swing.JTextArea
 import javax.swing.JTextField
@@ -137,7 +138,7 @@ class AgendaView : AgendaView {
 
                         layout = BorderLayout()
                         add(columJPanel, BorderLayout.NORTH)
-                        add(meetingsJTable, BorderLayout.CENTER)
+                        add(JScrollPane(meetingsJTable), BorderLayout.CENTER)
                     }
 
                     layout = BorderLayout()
@@ -192,9 +193,9 @@ class AgendaView : AgendaView {
                     add(addReviewJPanel)
                 }
 
-                layout = GridLayout(1, 2)
-                add(calendarJPanel)
-                add(controllJPanel)
+                layout = BorderLayout()
+                add(calendarJPanel, BorderLayout.CENTER)
+                add(controllJPanel, BorderLayout.EAST)
             }
 
             layout = BorderLayout()

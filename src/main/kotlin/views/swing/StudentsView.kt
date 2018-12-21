@@ -14,6 +14,7 @@ import java.util.Observable
 import javax.swing.JButton
 import javax.swing.JLabel
 import javax.swing.JPanel
+import javax.swing.JScrollPane
 import javax.swing.JTable
 import javax.swing.JTextField
 import javax.swing.table.DefaultTableModel
@@ -116,7 +117,7 @@ class StudentsView : StudentsView {
 
                     layout = BorderLayout()
                     add(columNameJPanel, BorderLayout.NORTH)
-                    add(studentsJTable, BorderLayout.CENTER)
+                    add(JScrollPane(studentsJTable), BorderLayout.CENTER)
                 }
 
                 layout = GridLayout(1, 2)

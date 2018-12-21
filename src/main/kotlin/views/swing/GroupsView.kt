@@ -15,6 +15,8 @@ import java.util.Observable
 import javax.swing.JButton
 import javax.swing.JLabel
 import javax.swing.JPanel
+import javax.swing.JScrollBar
+import javax.swing.JScrollPane
 import javax.swing.JTable
 import javax.swing.JTextField
 import javax.swing.table.DefaultTableModel
@@ -67,7 +69,7 @@ class GroupsView : views.GroupsView {
 
                             layout = BorderLayout()
                             add(columbNameJPanel, BorderLayout.NORTH)
-                            add(groupsJTable, BorderLayout.CENTER)
+                            add(JScrollPane(groupsJTable), BorderLayout.CENTER)
                         }
 
                         layout = BorderLayout()
@@ -92,7 +94,7 @@ class GroupsView : views.GroupsView {
 
                             layout = BorderLayout()
                             add(columNameJPanel, BorderLayout.NORTH)
-                            add(tracksJTable, BorderLayout.CENTER)
+                            add(JScrollPane(tracksJTable), BorderLayout.CENTER)
                         }
 
                         layout = BorderLayout()
@@ -173,9 +175,9 @@ class GroupsView : views.GroupsView {
                     add(addTrackJPanel)
                 }
 
-                layout = GridLayout(1, 2)
-                add(tablesJPanel)
-                add(controllJPanel)
+                layout = BorderLayout()
+                add(tablesJPanel, BorderLayout.CENTER)
+                add(controllJPanel, BorderLayout.EAST)
             }
 
             layout = BorderLayout()
